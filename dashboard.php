@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hotel Pariwisata</title>
 
-    <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <style>
@@ -14,7 +13,6 @@
             font-family: 'Segoe UI', sans-serif;
         }
 
-        /* Navbar */
         header {
             background-color: #2c3e50;
             padding: 15px 0;
@@ -36,7 +34,6 @@
             color: #f39c12;
         }
 
-        /* Hero */
         .hero {
             height: 80vh;
             background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
@@ -48,10 +45,6 @@
             color: white;
         }
 
-        .hero h2 {
-            font-size: 45px;
-        }
-
         .btn-custom {
             background-color: #f39c12;
             color: white;
@@ -61,7 +54,7 @@
             background-color: #e67e22;
         }
 
-        .fitur {
+        .fitur, .kamar, .testimoni {
             padding: 60px 0;
         }
 
@@ -69,24 +62,24 @@
             transform: translateY(-5px);
             transition: 0.3s;
         }
+
+        footer {
+            background-color: #2c3e50;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
+
 <header>
     <h1>Hotel Pariwisata</h1>
     <nav>
-        <a href="index.php">Home</a>
-        <a href="login.php">Login</a>
+        <a href="index.php" class="btn btn-light mt-2">Home</a>
+        <a href="login.php" class="btn btn-light mt-2">Login</a>
     </nav>
 </header>
-
-<section class="hero">
-    <div>
-        <h2>Selamat Datang</h2>
-        <p>Website reservasi hotel terbaik untuk liburan kamu</p>
-        <a href="login.php" class="btn btn-custom mt-3">Pesan Sekarang</a>
-    </div>
-</section>
 
 <div class="container fitur text-center">
     <div class="row">
@@ -113,7 +106,71 @@
     </div>
 </div>
 
-<footer style="center">
+<div class="container kamar text-center">
+    <h2 class="mb-4">Pilihan Kamar</h2>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card shadow">
+                <img src="img/standard room.jpg" class="card-img-top">
+                <div class="card-body">
+                    <h5>Standard Room</h5>
+                    <p>Nyaman untuk 2 orang.</p>
+                </div>
+                <a href="detail.php" class="btn btn-custom mt-3">Pesan</a>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card shadow">
+                <img src="img/deluxe room.jpg" class="card-img-top">
+                <div class="card-body">
+                    <h5>Deluxe Room</h5>
+                    <p>Lebih luas dan mewah.</p>
+                </div>
+                <a href=""></a>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card shadow">
+                <img src="img/suite room.jpg" class="card-img-top">
+                <div class="card-body">
+                    <h5>Suite Room</h5>
+                    <p>Fasilitas premium terbaik.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container testimoni text-center">
+    <h2 class="mb-4">Testimoni Pengunjung</h2>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card p-3 shadow">
+                <p>"Pelayanan sangat ramah dan kamar bersih!"</p>
+                <h6>- Andi</h6>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card p-3 shadow">
+                <p>"Lokasi strategis dekat tempat wisata."</p>
+                <h6>- Siti</h6>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card p-3 shadow">
+                <p>"Harga sesuai dengan fasilitas yang diberikan."</p>
+                <h6>- Budi</h6>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
     <p>&copy; 2026 Hotel Pariwisata | All Rights Reserved</p>
 </footer>
 
