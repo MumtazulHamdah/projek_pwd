@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="css/dashboard.css">
 </head>
 <body>
-
+//aku tadi benerin navbar doang, yang atur layot kamar belum
 <header class="navbar-custom">
     <div class="logo">
         <img src="img/logo.png" alt="Logo">
