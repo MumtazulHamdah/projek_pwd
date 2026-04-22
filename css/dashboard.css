@@ -1,47 +1,86 @@
-.grid {
-    display: flex;
-    gap: 20px;
-    margin-top: 20px;
+/* RESET DASAR */
+body {
+    margin: 0;
+    background-color: #f5f1e8;
+    font-family: 'Segoe UI', sans-serif;
 }
 
-.box {
-    background: #fff;
-    padding: 15px;
-    border-radius: 12px;
-    width: 300px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-    text-align: center;
+/* NAVBAR FIXED */
+.navbar-custom {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 40px;
+    background: #ffffff;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+.logo {
+    margin-left: -15px; 
+}
+/* LOGO */
+.logo img {
+    height: 54px;
+}
+
+/* MENU */
+.menu {
+    display: flex;
+    gap: 20px;
+}
+
+.menu a {
+    text-decoration: none;
+    color: #333;
+    font-size: 13px;
     transition: 0.3s;
 }
 
-.box:hover {
-    transform: translateY(-5px);
+.menu a:hover {
+    color: #003049;
 }
-
-.box img {
-    width: 100%;
-    height: 160px;
-    object-fit: cover;
-    border-radius: 10px;
-    margin-bottom: 10px;
+.menu a:active {
+    color: #003049;
+    font-weight: bold;
+    transform: scale(0.95);
 }
-
-.box button {
-    margin-top: 10px;
-    padding: 8px;
-    width: 100%;
-    border: none;
-    background: #3498db;
+/* BUTTON BOOK */
+.btn-book {
+    background: #003049;
     color: white;
-    border-radius: 6px;
-    cursor: pointer;
+    padding: 8px 16px;
+    text-decoration: none;
+    font-size: 13px;
+
+    clip-path: polygon(10% 0, 90% 0, 100% 50%, 90% 100%, 10% 100%, 0 50%);
 }
 
-.box button:hover {
-    background: #2980b9;
+.btn-book:hover {
+    opacity: 0.85;
+}
+.hero-section {
+    padding-top: 50px; /* ganti cara dorongnya */
+}
+/* HERO IMAGE */
+.hero-section img {
+    width: 100%;
+    height: 100vh;
+    object-fit: cover;
+    display: block;
 }
 
+/* SECTION SPACING */
+.fitur, .kamar, .testimoni {
+    padding: 60px 0;
+}
+
+/* CARD */
 .card {
+    border-radius: 12px;
     transition: 0.3s;
 }
 
@@ -49,12 +88,56 @@
     transform: translateY(-5px);
 }
 
-.hero {
-    background: linear-gradient(to right, rgba(0,0,0,0.6), rgba(0,0,0,0.3)),
-                url('https://source.unsplash.com/1600x900/?hotel,resort') no-repeat center/cover;
+/* BUTTON CUSTOM */
+.btn-custom {
+    background-color: #003049;
+    color: white;
 }
 
-nav a.active {
-    color: #f39c12;
-    font-weight: bold;
+.btn-custom:hover {
+    background-color: #002030;
+}
+
+/* ABOUT SECTION */
+.about-section {
+    background: #f5f1e8;
+    padding: 40px 80px;
+}
+
+/* GARIS + JUDUL */
+.title-line {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.title-line span {
+    flex: 1;
+    height: 1px;
+    background: #aaa;
+}
+
+.title-line h2 {
+    margin: 0;
+    font-weight: 600;
+    color: #333;
+}
+
+/* TEXT */
+.about-section p {
+    max-width: 800px;
+    margin: auto;
+    color: #555;
+    font-size: 14px;
+}
+
+/* FOOTER */
+footer {
+    background-color: #ffffff;
+    color: #555;
+    padding: 20px;
+    text-align: center;
+    margin-top: 50px;
 }
