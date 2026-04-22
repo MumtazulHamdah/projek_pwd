@@ -3,84 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hotel Pariwisata</title>
-
+    <title>Ombak Biru Hotel</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <style>
-        body {
-            background-color: #f4f6f9;
-            font-family: 'Segoe UI', sans-serif;
-        }
-
-        header {
-            background-color: #2c3e50;
-            padding: 15px 0;
-            text-align: center;
-        }
-
-        header h1 {
-            color: white;
-            margin-bottom: 5px;
-        }
-
-        nav a {
-            color: white;
-            margin: 0 15px;
-            text-decoration: none;
-        }
-
-        nav a:hover {
-            color: #f39c12;
-        }
-
-        .hero {
-            height: 80vh;
-            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
-                        url('https://source.unsplash.com/1600x900/?hotel,resort') no-repeat center/cover;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            color: white;
-        }
-
-        .btn-custom {
-            background-color: #f39c12;
-            color: white;
-        }
-
-        .btn-custom:hover {
-            background-color: #e67e22;
-        }
-
-        .fitur, .kamar, .testimoni {
-            padding: 60px 0;
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-            transition: 0.3s;
-        }
-
-        footer {
-            background-color: #2c3e50;
-            color: white;
-            padding: 20px;
-            text-align: center;
-        }
-    </style>
+    <link rel="stylesheet" href="css/dashboard.css">
 </head>
 <body>
+//aku tadi benerin navbar doang, yang atur layot kamar belum
+<header class="navbar-custom">
+    <div class="logo">
+        <img src="img/logo.png" alt="Logo">
+    </div>
 
-<header>
-    <h1>Hotel Pariwisata</h1>
-    <nav>
-        <a href="index.php" class="btn btn-light mt-2">Home</a>
-        <a href="login.php" class="btn btn-light mt-2">Login</a>
-    </nav>
+    <div class="menu">
+        <a href="#">Home</a>
+        <a href="#">Rooms</a>
+        <a href="#">Facilities</a>
+        <a href="#">Ballroom</a>
+        <a href="#">Location</a>
+        <a href="#">Contact Us</a>
+    </div>
+    <a href="#" class="btn-book">BOOK NOW</a>
 </header>
+<div class="hero-section">
+    <img src="img/hotel.jpg" alt="Hotel Lobby">
+</div>
+<div class="about-section text-center">
+    <div class="title-line">
+        <span></span>
+        <h2>Ombak Biru Hotel</h2>
+        <span></span>
+    </div>
 
+    <p>
+
+        Ombak Biru Hotel adalah hotel nyaman yang terletak di dekat kawasan laut dengan pemandangan pantai yang memukau. Dikelilingi oleh keindahan alam yang mempesona, hotel ini menawarkan suasana tenang dan segar yang cocok untuk melepas penat. Dengan fasilitas lengkap dan pelayanan terbaik, Ombak Biru Hotel menjadi pilihan ideal untuk liburan santai maupun perjalanan bisnis, sambil menikmati panorama laut yang indah setiap hari.
+    </p>
+</div>
 <div class="container fitur text-center">
     <div class="row">
         <div class="col-md-4">
@@ -171,7 +129,7 @@
 
 <!-- FOOTER -->
 <footer>
-    <p>&copy; 2026 Hotel Pariwisata | All Rights Reserved</p>
+    <p>&copy; Ombak Biru Hotel | All Rights Reserved</p>
 </footer>
 
 </body>
