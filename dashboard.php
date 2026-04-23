@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hotel Pariwisata</title>
+    <title>Ocean Breeze Hotel</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
 
@@ -74,7 +74,7 @@
 <body>
 
 <header>
-    <h1>Hotel Pariwisata</h1>
+    <h1>Ocean Breeze Hotel</h1>
     <nav>
         <a href="index.php" class="btn btn-light mt-2">Home</a>
         <a href="login.php" class="btn btn-light mt-2">Login</a>
