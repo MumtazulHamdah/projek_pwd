@@ -3,13 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<<<<<<< HEAD
-    <title>Ocean Breeze Hotel</title>
-
-=======
     <title>Ombak Biru Hotel</title>
->>>>>>> 688d55d8be49a007c1007f962d1dceebb8ec803b
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    
     <link rel="stylesheet" href="css/dashboard.css">
 </head>
 <body>
@@ -19,14 +17,6 @@
         <img src="img/logo.png" alt="Logo">
     </div>
 
-<<<<<<< HEAD
-<header>
-    <h1>Ocean Breeze Hotel</h1>
-    <nav>
-        <a href="index.php" class="btn btn-light mt-2">Home</a>
-        <a href="login.php" class="btn btn-light mt-2">Login</a>
-    </nav>
-=======
     <div class="menu">
         <a href="#">Home</a>
         <a href="#">Rooms</a>
@@ -36,12 +26,18 @@
         <a href="#">Contact Us</a>
     </div>
     <a href="#" class="btn-book">BOOK NOW</a>
->>>>>>> 688d55d8be49a007c1007f962d1dceebb8ec803b
 </header>
-<div class="hero-section">
-    <img src="img/hotel.jpg" alt="Hotel Lobby">
+
+<main>
+<div class="hero-section position-relative">
+    <img src="img/hotel.jpg" alt="Hotel Lobby" class="w-100" style="height: 90vh; object-fit: cover;">
+    <div class="overlay d-flex flex-column justify-content-center align-items-center text-white">
+        <h1>Welcome to Ombak Biru Hotel</h1>
+        <p>Nikmati kenyamanan dengan pemandangan laut</p>
+        <a href="#" class="btn btn-light mt-3">Explore</a>
+    </div>
 </div>
-<div class="about-section text-center">
+<div class="about-section text-center my-5">
     <div class="title-line">
         <span></span>
         <h2>Ombak Biru Hotel</h2>
@@ -53,97 +49,161 @@
         Ombak Biru Hotel adalah hotel nyaman yang terletak di dekat kawasan laut dengan pemandangan pantai yang memukau. Dikelilingi oleh keindahan alam yang mempesona, hotel ini menawarkan suasana tenang dan segar yang cocok untuk melepas penat. Dengan fasilitas lengkap dan pelayanan terbaik, Ombak Biru Hotel menjadi pilihan ideal untuk liburan santai maupun perjalanan bisnis, sambil menikmati panorama laut yang indah setiap hari.
     </p>
 </div>
-<div class="container fitur text-center">
-    <div class="row">
-        <div class="col-md-4">
-            <div class="card p-3 shadow">
+<div class="container fitur text-center my-5">
+    <div class="row g-4">
+
+        <div class="col-md-4 d-flex">
+            <div class="card p-4 shadow w-100 d-flex flex-column justify-content-center fitur-card">
                 <h4>Kamar Nyaman</h4>
                 <p>Kamar bersih dan nyaman untuk istirahat.</p>
             </div>
         </div>
 
-        <div class="col-md-4">
-            <div class="card p-3 shadow">
+        <div class="col-md-4 d-flex">
+            <div class="card p-4 shadow w-100 d-flex flex-column justify-content-center fitur-card">
                 <h4>Harga Terjangkau</h4>
                 <p>Harga terbaik untuk semua kalangan.</p>
             </div>
         </div>
 
-        <div class="col-md-4">
-            <div class="card p-3 shadow">
+        <div class="col-md-4 d-flex">
+            <div class="card p-4 shadow w-100 d-flex flex-column justify-content-center fitur-card">
                 <h4>Lokasi Strategis</h4>
                 <p>Dekat dengan tempat wisata populer.</p>
-            </div>
+            </div>  
         </div>
+
     </div>
 </div>
 
-<div class="container kamar text-center">
-    <h2 class="mb-4">Pilihan Kamar</h2>
-    <div class="row">
-        <div class="col-md-4">
-            <div class="card shadow">
-                <img src="img/standard room.jpg" class="card-img-top">
-                <div class="card-body">
-                    <h5>Standard Room</h5>
-                    <p>Nyaman untuk 2 orang.</p>
-                </div>
-                <a href="detail.php" class="btn btn-custom mt-3">Pesan</a>
-            </div>
-        </div>
+<div class="container kamar text-center my-5">
+    <h2 class=" text-center mb-5 fw-bold">Pilihan Kamar</h2>
+    <div class="row g-4">
 
-        <div class="col-md-4">
-            <div class="card shadow">
-                <img src="img/deluxe room.jpg" class="card-img-top">
-                <div class="card-body">
-                    <h5>Deluxe Room</h5>
-                    <p>Lebih luas dan mewah.</p>
+        <div class="col-md-4 d-flex">
+            <div class="card shadow w-100 d-flex flex-column" >
+                <div class="position-relative">
+                     <img src="img/standard room.jpg" class="card-img-top">
+                     <span class="badge bg-primary position-absolute top-0 end-0 m-2">Best Value</span>
                 </div>
-                <a href=""></a>
-            </div>
-        </div>
-
-        <div class="col-md-4">
-            <div class="card shadow">
-                <img src="img/suite room.jpg" class="card-img-top">
-                <div class="card-body">
-                    <h5>Suite Room</h5>
-                    <p>Fasilitas premium terbaik.</p>
+                <div class="card-body text-center">
+                    <h5 class="fw-bold">Standard Room</h5>
+                    <p class="text-muted">Nyaman untuk 2 orang</p>
+                    <p class="fw-bold text-primary fs-5">Rp 350.000 / malam</p>
+                    <p class="small">👤 2 Tamu • 📶 WiFi • ❄️ AC • 📺 TV</p>
+                    <a href="detail.php" class="btn btn-outline-primary w-100 mt-3">Pesan</a>
                 </div>
             </div>
         </div>
-    </div>
-</div>
 
-<div class="container testimoni text-center">
+        <div class="col-md-4 d-flex">
+            <div class="card shadow w-100 d-flex flex-column">
+                <div class="position-relative">
+                    <img src="img/deluxe room.jpg" class="card-img-top">
+                    <span class="badge bg-primary position-absolute top-0 end-0 m-2">Populer</span>
+                </div>
+                <div class="card-body text-center">
+                    <h5 class="fw-bold">Deluxe Room</h5>
+                    <p class="text-muted">Lebih luas & elegan</p>
+                    <p class="fw-bold text-primary fs-5">Rp 650.000 / malam</p>
+                    <p class="small">👤 3 Tamu • 📶 WiFi • ❄️ AC • ☕ Breakfast</p>
+                    <a href="detail.php" class="btn btn-outline-primary w-100 mt-3">Pesan</a>
+                </div>
+            </div>
+        </div>
+               
+
+        <div class="col-md-4 d-flex">
+            <div class="card shadow w-100 d-flex flex-column">
+                <div class="position-relative">
+                    <img src="img/suite room.jpg" class="card-img-top">
+                    <span class="badge bg-primary position-absolute top-0 end-0 m-2">Premium</span>
+                </div>
+                <div class="card-body text-center">
+                    <h5 class="fw-bold">Suite Room</h5>
+                    <p class="text-muted">Fasilitas terbaik & mewah</p>
+                    <p class="fw-bold text-primary fs-5">Rp 1.200.000 / malam</p>
+                    <p class="small">👤 4 Tamu • 🛁 Bathtub • 🌊 View Laut</p>
+                    <a href="detail.php" class="btn btn-outline-primary w-100 mt-3">Pesan</a>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="container testimoni text-center my-5">
     <h2 class="mb-4">Testimoni Pengunjung</h2>
-    <div class="row">
-        <div class="col-md-4">
-            <div class="card p-3 shadow">
+    <div class="row g-4">
+
+        <div class="col-md-4 d-flex">
+            <div class="card p-4 shadow w-100 d-flex flex-column justify-content-between">
                 <p>"Pelayanan sangat ramah dan kamar bersih!"</p>
-                <h6>- Andi</h6>
+                <h6 class="mt-3">- Andi</h6>
             </div>
         </div>
 
-        <div class="col-md-4">
-            <div class="card p-3 shadow">
+        <div class="col-md-4 d-flex">
+            <div class="card p-4 shadow w-100 d-flex flex-column justify-content-between">
                 <p>"Lokasi strategis dekat tempat wisata."</p>
-                <h6>- Siti</h6>
+                <h6 class="mt-3">- Siti</h6>
             </div>
         </div>
 
-        <div class="col-md-4">
-            <div class="card p-3 shadow">
+        <div class="col-md-4 d-flex">
+            <div class="card p-4 shadow w-100 d-flex flex-column justify-content-between">
                 <p>"Harga sesuai dengan fasilitas yang diberikan."</p>
-                <h6>- Budi</h6>
+                <h6 class="mt-3">- Budi</h6>
             </div>
         </div>
+
     </div>
 </div>
+</main>
 
 <!-- FOOTER -->
-<footer>
-    <p>&copy; Ombak Biru Hotel | All Rights Reserved</p>
+<footer class="footer-custom text-white pt-5 pb-3">
+    <div class="container">
+        <div class="row">
+
+            <!-- BRAND -->
+            <div class="col-md-4 mb-4">
+                <h4 class="fw-bold">Ombak Biru Hotel</h4>
+                <p>Nikmati kenyamanan menginap dengan pemandangan laut yang indah dan suasana tenang.</p>
+            </div>
+
+            <!-- MENU -->
+            <div class="col-md-4 mb-4">
+                <h5 class="fw-bold">Menu</h5>
+                <ul class="list-unstyled">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Rooms</a></li>
+                    <li><a href="#">Facilities</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+
+            <!-- CONTACT -->
+            <div class="col-md-4 mb-4">
+                <h5 class="fw-bold">Contact</h5>
+                <p>📍 Yogyakarta, Indonesia</p>
+                <p>📞 0812-3456-7890</p>
+                <p>✉️ ombakbiru@email.com</p>
+
+                <!-- SOCIAL MEDIA -->
+                <div class="social-icons mt-3">
+                    <a href="#"><i class="bi bi-facebook"></i></a>
+                    <a href="#"><i class="bi bi-instagram"></i></a>
+                    <a href="#"><i class="bi bi-twitter"></i></a>
+                </div>
+            </div>
+
+        </div>
+
+        <hr class="bg-light">
+
+        <p class="text-center small mb-0">
+            &copy; 2026 Ombak Biru Hotel | All Rights Reserved
+        </p>
+    </div>
 </footer>
 
 </body>

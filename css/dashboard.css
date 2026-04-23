@@ -1,11 +1,15 @@
-/* RESET DASAR */
 body {
     margin: 0;
-    background-color: #f5f1e8;
-    font-family: 'Segoe UI', sans-serif;
+    color: #333;
+    background-color: #f8f9fa;
+    font-family: 'Poppins', sans-serif;
 }
 
-/* NAVBAR FIXED */
+h1, h2, h3, h4 {
+    font-family: 'Playfair Display', serif;
+    color: #0f2a44;
+}
+
 .navbar-custom {
     position: fixed;
     top: 0;
@@ -16,9 +20,32 @@ body {
     align-items: center;
     justify-content: space-between;
     padding: 10px 40px;
+    background-color: #0f2a44;
     background: #ffffff;
     box-shadow: 0 2px 10px rgba(0,0,0,0.05);
 }
+.navbar-custom a {
+    color: white;
+}
+
+.btn-book {
+    background-color: #003049;
+    color: white;
+    text-decoration: none;
+    padding: 8px 16px;
+    font-size: 13px;
+    clip-path: polygon(10% 0, 90% 0, 100% 50%, 90% 100%, 10% 100%, 0 50%);
+}
+
+.btn-primary {
+    background-color: #0f2a44;
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: #c8a9;
+}
+
 .logo {
     margin-left: -15px; 
 }
@@ -41,27 +68,15 @@ body {
 }
 
 .menu a:hover {
-    color: #003049;
+    color: #c8a96a;
+    transition: 0.3s;
 }
 .menu a:active {
     color: #003049;
     font-weight: bold;
     transform: scale(0.95);
 }
-/* BUTTON BOOK */
-.btn-book {
-    background: #003049;
-    color: white;
-    padding: 8px 16px;
-    text-decoration: none;
-    font-size: 13px;
 
-    clip-path: polygon(10% 0, 90% 0, 100% 50%, 90% 100%, 10% 100%, 0 50%);
-}
-
-.btn-book:hover {
-    opacity: 0.85;
-}
 .hero-section {
     padding-top: 50px; /* ganti cara dorongnya */
 }
@@ -73,9 +88,27 @@ body {
     display: block;
 }
 
-/* SECTION SPACING */
-.fitur, .kamar, .testimoni {
+.kamar, .testimoni {
     padding: 60px 0;
+}
+
+.fitur card {
+    height: 100%;
+    border-radius: 12px;
+    transition: 0.3s;
+}
+
+.fitur .card:hover {
+    transform: translateY(-8px);
+}
+
+.fitur h4 {
+    font-weight: 600;
+    color: #003049;
+}
+
+.fitur p {
+    color: #555;
 }
 
 /* CARD */
@@ -114,15 +147,17 @@ body {
 }
 
 .title-line span {
-    flex: 1;
-    height: 1px;
-    background: #aaa;
+    display: inline-block;
+    width: 50px;
+    height: 2px;
+    background-color: #c8a96a;
+    margin: 0 10px;
 }
 
 .title-line h2 {
     margin: 0;
     font-weight: 600;
-    color: #333;
+    color: #0f2a44;
 }
 
 /* TEXT */
@@ -133,11 +168,120 @@ body {
     font-size: 14px;
 }
 
-/* FOOTER */
-footer {
-    background-color: #ffffff;
+.footer-custom {
+    background-color: #0F2A44;
+}
+
+.footer-custom h4,
+.footer-custom h5 {
+    color: #C8A96A;
+}
+
+.footer-custom p {
+    font-size: 14px;
+}
+
+.footer-custom a {
+    color: #ddd;
+    text-decoration: none;
+    display: block;
+    margin-bottom: 5px;
+    transition: 0.3s;
+}
+
+.footer-custom a:hover {
+    color: #C8A96A;
+    padding-left: 5px;
+}
+
+/* SOCIAL ICON */
+.social-icons a {
+    display: inline-block;
+    color: white;
+    margin-right: 10px;
+    font-size: 18px;
+    transition: 0.3s;
+}
+
+.social-icons a:hover {
+    color: #C8A96A;
+    transform: scale(1.2);
+}
+
+.hero-section .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.5);
+}
+
+.hero-section h1 {
+    font-size: 3rem;
+    font-weight: bold;
+}
+
+.fitur .card:hover,
+.kamar .card:hover {
+    transform: translateY(-8px);
+    transition: 0.3s;
+}
+
+.kamar img {
+    height: 200px;
+    object-fit: cover;
+}
+
+.card {
+    border: none;
+    border-radius: 10px;
+}
+
+.btn-primary {
+    border-radius: 25px;
+    padding: 8px 20px;
+}
+
+.overlay {
+    background: rgba(0, 0, 0, 0,4);
+}
+
+.room-card img {
+    height: 220px;
+    object-fit: cover;
+}
+
+.room-card {
+    transition: 0.3s;
+    border-radius: 15px;
+}
+
+.room-card:hover {
+    transform: translateY(-10px);
+}
+
+.badge {
+    font-size: 12px;
+    padding: 6px 10px;
+}
+
+.testimoni .card {
+    height: 100%;
+    border-radius: 12px;
+}
+
+.testimoni p {
+    font-style: italic;
     color: #555;
-    padding: 20px;
-    text-align: center;
-    margin-top: 50px;
+}
+
+.testimoni h6 {
+    font-weight: 600;
+    color: #003049;
+}
+
+.testimoni .card:hover {
+    transform: translateY(-8px);
+    transition: 0.3s;
 }
