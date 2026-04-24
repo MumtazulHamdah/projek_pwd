@@ -1,71 +1,106 @@
 <?php
 session_start();
+include 'koneksi.php';
 
-// kalo udah login redirect ke dashboard
-if (isset($_SESSION['user'])) {
-    header("Location: dashboard.php");
-    exit;
-}
+if(isset($_POST['login'])) {
+    $username = $_POST['username'];
+    $password = $_POST['password'];
 
-if (!isset($_SESSION['token'])) {
-    $_SESSION['token'] = bin2hex(random_bytes(32));
+    $query = mysqli_query($conn, "SELECT * FROM admin 
+              WHERE username='$username' AND password='$password'");
+
+    if(mysqli_num_rows($query) > 0) {
+        $_SESSION['admin'] = $username;
+        header("Location: admin_kamar.php");
+    } else {
+        $error = "Username atau password salah!";
+    }
 }
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Hotel Pariwisata</title>
+<meta charset="UTF-8">
+<title>Admin Login</title>
 
-    <!-- Bootstrap --> 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <link rel="stylesheet" href="css/login.css">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+body {
+    font-family: 'Poppins', sans-serif;
+    background: url('img/hotel.jpg') no-repeat center center/cover;
+    height: 100vh;
+    margin: 0;
+}
+
+.overlay {
+    position: absolute;
+    top:0; left:0;
+    width:100%; height:100%;
+    background: rgba(0,0,0,0.6);
+}
+
+.login-card {
+    background: #fff;
+    border-radius: 15px;
+    padding: 30px;
+    width: 360px;
+    z-index: 2;
+    position: relative;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+.login-title {
+    font-weight: 600;
+    color: #0f2a44;
+}
+
+.btn-login {
+    background: #0f2a44;
+    color: white;
+    border-radius: 8px;
+}
+
+.btn-login:hover {
+    background: #081a2b;
+}
+</style>
 </head>
+
 <body>
 
-    <div class="container login-container d-flex justify-content-center align-items-center">
-        <div class="card shadow p-4">
-            <h3 class="text-center mb-3">Login User</h3>
+<div class="overlay d-flex justify-content-center align-items-center">
 
-            <!-- pesan eror -->
-            <?php if(isset($_GET['error'])) { ?>
-                <div class="alert alert-danger text-center">
-                    <?php echo htmlspecialchars($_GET['error']); ?>
-                </div>
-            <?php } ?>
+    <div class="login-card">
 
-            <form method="post" action="proses_login.php">
-                <!-- token csrf -->
-                <input type="hidden" name="token" value="<?php echo $_SESSION['token']; ?>">
+        <h3 class="text-center login-title mb-3">Admin Login</h3>
+        <p class="text-center text-muted mb-4">Ombak Biru Hotel System</p>
 
-                <div class="mb-3">
-                    <label class="form-label">Username</label>
-                    <input type="text" name="username" class="form-control" placeholder="Masukkan username" required>
-                </div>
+        <?php if(isset($error)) : ?>
+            <div class="alert alert-danger"><?= $error; ?></div>
+        <?php endif; ?>
 
-                <div class="mb-3">
-                    <label class="form-label">Password</label>
-                    <input type="password" name="password" class="form-control" placeholder="Masukkan password" minlength="5" required>
-                </div>
+        <form method="POST">
 
-                <div class="mb-3">
-                    <input type="checkbox" onclick="togglePassword()"> Lihat Password
-                </div>
+            <div class="mb-3">
+                <label>Username</label>
+                <input type="text" name="username" class="form-control" required>
+            </div>
 
-                <button type="submit" class="btn btn-custom w-100">Login</button>
-            </form>
-        </div>
+            <div class="mb-3">
+                <label>Password</label>
+                <input type="password" name="password" class="form-control" required>
+            </div>
+
+            <button type="submit" name="login" class="btn btn-login w-100">
+                Login
+            </button>
+
+        </form>
     </div>
-
-    <script>
-        function togglePassword() {
-            var x = document.querySelector('input[name="password"]');
-            x.type = x.type === "password" ? "text" : "password";
-        }
-    </script>
-
+</div>
 </body>
 </html>

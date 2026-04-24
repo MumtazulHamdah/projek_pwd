@@ -26,18 +26,18 @@ $kamar = mysqli_fetch_all($query, MYSQLI_ASSOC);
     </div>
 
     <div class="menu">
-        <a href="#">Home</a>
-        <a href="#">Rooms</a>
-        <a href="#">Facilities</a>
-        <a href="#">Ballroom</a>
-        <a href="#">Location</a>
-        <a href="#">Contact Us</a>
+    <a href="#home">Home</a>
+    <a href="#rooms">Rooms</a>
+    <a href="fasilitas.php">Facilities</a>
+    <a href="balroom.php">Ballroom</a>
+    <a href="#location">Location</a>
+    <a href="#contact-us">Contact Us</a>
     </div>
-    <a href="#" class="btn-book">BOOK NOW</a>
+    <a href="login.php" class="btn-book">LOGIN NOW</a>
 </header>
 
 <main>
-<div class="hero-section position-relative">
+<div class="hero-section position-relative" id="home">
     <img src="img/hotel.jpg" alt="Hotel Lobby" class="w-100" style="height: 90vh; object-fit: cover;">
     <div class="overlay d-flex flex-column justify-content-center align-items-center text-white">
         <h1>Welcome to Ombak Biru Hotel</h1>
@@ -57,7 +57,7 @@ $kamar = mysqli_fetch_all($query, MYSQLI_ASSOC);
         Ombak Biru Hotel adalah hotel nyaman yang terletak di dekat kawasan laut dengan pemandangan pantai yang memukau. Dikelilingi oleh keindahan alam yang mempesona, hotel ini menawarkan suasana tenang dan segar yang cocok untuk melepas penat. Dengan fasilitas lengkap dan pelayanan terbaik, Ombak Biru Hotel menjadi pilihan ideal untuk liburan santai maupun perjalanan bisnis, sambil menikmati panorama laut yang indah setiap hari.
     </p>
 </div>
-<div class="container fitur text-center my-5">
+<div class="container fitur text-center my-5" id="facilities">
     <div class="row g-4">
 
         <div class="col-md-4 d-flex">
@@ -80,11 +80,10 @@ $kamar = mysqli_fetch_all($query, MYSQLI_ASSOC);
                 <p>Dekat dengan tempat wisata populer.</p>
             </div>  
         </div>
-
     </div>
 </div>
 
-<div class="container kamar text-center my-5">
+<div class="container kamar text-center my-5" id="rooms">
     <h2 class=" text-center mb-5 fw-bold">Pilihan Kamar</h2>
     <div class="row g-4">
 
@@ -193,7 +192,7 @@ $kamar = [
             </div>
 
             <!-- CONTACT -->
-            <div class="col-md-4 mb-4">
+            <div class="col-md-4 mb-4" id="location" >
                 <h5 class="fw-bold">Contact</h5>
                 <p>📍 Yogyakarta, Indonesia</p>
                 <p>📞 0812-3456-7890</p>
