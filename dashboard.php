@@ -1,3 +1,11 @@
+<?php
+include 'koneksi.php';
+
+$query = mysqli_query($conn, "SELECT * FROM kamar");
+
+$kamar = mysqli_fetch_all($query, MYSQLI_ASSOC);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -80,52 +88,55 @@
     <h2 class=" text-center mb-5 fw-bold">Pilihan Kamar</h2>
     <div class="row g-4">
 
-        <div class="col-md-4 d-flex">
-            <div class="card shadow w-100 d-flex flex-column" >
-                <div class="position-relative">
-                     <img src="img/standard room.jpg" class="card-img-top">
-                     <span class="badge bg-primary position-absolute top-0 end-0 m-2">Best Value</span>
-                </div>
-                <div class="card-body text-center">
-                    <h5 class="fw-bold">Standard Room</h5>
-                    <p class="text-muted">Nyaman untuk 2 orang</p>
-                    <p class="fw-bold text-primary fs-5">Rp 350.000 / malam</p>
-                    <p class="small">👤 2 Tamu • 📶 WiFi • ❄️ AC • 📺 TV</p>
-                    <a href="detail.php" class="btn btn-outline-primary w-100 mt-3">Pesan</a>
-                </div>
-            </div>
-        </div>
-
+    <?php foreach($kamar as $k) : ?>
         <div class="col-md-4 d-flex">
             <div class="card shadow w-100 d-flex flex-column">
                 <div class="position-relative">
-                    <img src="img/deluxe room.jpg" class="card-img-top">
-                    <span class="badge bg-primary position-absolute top-0 end-0 m-2">Populer</span>
+                    <img src="<?= $k['gambar']; ?>" class="card-img-top">
+                    <span class="badge bg-primary position-absolute top-0 end-0 m-2">
+                        <?= $k['badge']; ?>
+                    </span>
                 </div>
+
                 <div class="card-body text-center">
-                    <h5 class="fw-bold">Deluxe Room</h5>
-                    <p class="text-muted">Lebih luas & elegan</p>
-                    <p class="fw-bold text-primary fs-5">Rp 650.000 / malam</p>
-                    <p class="small">👤 3 Tamu • 📶 WiFi • ❄️ AC • ☕ Breakfast</p>
-                    <a href="detail.php" class="btn btn-outline-primary w-100 mt-3">Pesan</a>
+                    <h5 class="fw-bold"><?= $k['nama']; ?></h5>
+                    <p class="text-muted"><?= $k['deskripsi']; ?></p>
+                    <p class="fw-bold text-primary fs-5"><?= $k['harga']; ?></p>
+                    <p class="small"><?= $k['fitur']; ?></p>
+                    <a href="booking.php?id=<?= $k['id']; ?>" class="btn btn-outline-primary w-100 mt-3">Pesan</a>
                 </div>
             </div>
         </div>
-               
+        <?php endforeach; ?>
 
-        <div class="col-md-4 d-flex">
-            <div class="card shadow w-100 d-flex flex-column">
-                <div class="position-relative">
-                    <img src="img/suite room.jpg" class="card-img-top">
-                    <span class="badge bg-primary position-absolute top-0 end-0 m-2">Premium</span>
-                </div>
-                <div class="card-body text-center">
-                    <h5 class="fw-bold">Suite Room</h5>
-                    <p class="text-muted">Fasilitas terbaik & mewah</p>
-                    <p class="fw-bold text-primary fs-5">Rp 1.200.000 / malam</p>
-                    <p class="small">👤 4 Tamu • 🛁 Bathtub • 🌊 View Laut</p>
-                    <a href="detail.php" class="btn btn-outline-primary w-100 mt-3">Pesan</a>
-                </div>
+    <?php
+$kamar = [
+    [
+        "nama" => "Standard Room",
+        "deskripsi" => "Nyaman untuk 2 orang",
+        "harga" => "Rp 350.000 / malam",
+        "fitur" => "👤 2 Tamu • 📶 WiFi • ❄️ AC • 📺 TV",
+        "gambar" => "img/standard room.jpg",
+        "badge" => "Best Value"
+    ],
+    [
+        "nama" => "Deluxe Room",
+        "deskripsi" => "Lebih luas & elegan",
+        "harga" => "Rp 650.000 / malam",
+        "fitur" => "👤 3 Tamu • 📶 WiFi • ❄️ AC • ☕ Breakfast",
+        "gambar" => "img/deluxe room.jpg",
+        "badge" => "Populer"
+    ],
+    [
+        "nama" => "Suite Room",
+        "deskripsi" => "Fasilitas terbaik & mewah",
+        "harga" => "Rp 1.200.000 / malam",
+        "fitur" => "👤 4 Tamu • 🛁 Bathtub • 🌊 View Laut",
+        "gambar" => "img/suite room.jpg",
+        "badge" => "Premium"
+    ]
+];
+?>
             </div>
         </div>
 

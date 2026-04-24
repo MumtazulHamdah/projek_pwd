@@ -25,7 +25,7 @@ h1, h2, h3, h4 {
     box-shadow: 0 2px 10px rgba(0,0,0,0.05);
 }
 .navbar-custom a {
-    color: white;
+    color: #333;
 }
 
 .btn-book {
@@ -43,7 +43,7 @@ h1, h2, h3, h4 {
 }
 
 .btn-primary:hover {
-    background-color: #c8a9;
+    background-color: #c8a96a;
 }
 
 .logo {
@@ -78,7 +78,7 @@ h1, h2, h3, h4 {
 }
 
 .hero-section {
-    padding-top: 50px; /* ganti cara dorongnya */
+    margin-top: 80px;
 }
 /* HERO IMAGE */
 .hero-section img {
@@ -92,7 +92,7 @@ h1, h2, h3, h4 {
     padding: 60px 0;
 }
 
-.fitur card {
+.fitur .card {
     height: 100%;
     border-radius: 12px;
     transition: 0.3s;
@@ -222,15 +222,33 @@ h1, h2, h3, h4 {
     font-weight: bold;
 }
 
-.fitur .card:hover,
+.kamar .card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.kamar .card-body {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
 .kamar .card:hover {
     transform: translateY(-8px);
-    transition: 0.3s;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.kamar, .testimoni {
+    padding: 80px 0;
 }
 
 .kamar img {
-    height: 200px;
+    height: 220px;
     object-fit: cover;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
 }
 
 .card {
@@ -244,7 +262,7 @@ h1, h2, h3, h4 {
 }
 
 .overlay {
-    background: rgba(0, 0, 0, 0,4);
+    background: rgba(0, 0, 0, 0.4);
 }
 
 .room-card img {
