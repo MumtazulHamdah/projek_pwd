@@ -1,5 +1,11 @@
 <?php
 include 'koneksi.php';
+
+if (!isset($_GET['id'])) {
+    die("ID kamar tidak ditemukan!");
+
+}
+
 $id = (int) $_GET['id'];
 $query = mysqli_query($conn, "SELECT * FROM kamar WHERE  id=$id");
 $k = mysqli_fetch_assoc($query);

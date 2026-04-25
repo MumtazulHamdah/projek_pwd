@@ -1,3 +1,4 @@
+<?php include 'config.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,6 +8,7 @@
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
 
  <style>
 body {
@@ -52,7 +54,7 @@ body {
             </div>
         </div>
     </div>
-
+    
     <div class="container my-5">
         <div class="text-center mb-5">
             <h2>Fasilitas Hotel</h2>
@@ -60,46 +62,25 @@ body {
         </div>
 
         <div class="row g-4">
-            <div class="col-md-4">
-                <div class="card facility-card p-3 text-center h-100">
-                    <h4>Restaurant</h4>
-                    <p>Restoran dengan menu lokal & internasional.</p>
-                </div>
-            </div>
+            
+            <?php
+            $query = mysqli_query($conn, "SELECT * FROM facilities");
 
-            <div class="row g-4">
-            <div class="col-md-4">
-                <div class="card facility-card p-3 text-center h-100">
-                    <h4>Hall</h4>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+            while ($row = mysqli_fetch_assoc($query)) {
+                ?>
+                
+                <div class="col-md-4">
+                    <div class="card facility-card h-100 shadow-sm">
+                        <img src="img/<?php echo $row['image']; ?>" class="card-img-top">
+                        <div class="card-body text-center">
+                            <i class="bi <?php echo $row['icon']; ?> fs-1 text-primary"></i>
+                            <h5 class="mt-3"><?php echo $row['name']; ?></h5>
+                            <p class="text-muted"><?php echo $row['description']; ?></p>
+                        </div>
+                    </div>
                 </div>
-            </div>
-
-            <div class="row g-4">
-            <div class="col-md-4">
-                <div class="card facility-card p-3 text-center h-100">
-                    <h4>Swimming Pool</h4>
-                    <p>Kolam renang dengan view laut yang indah.</p>
-                </div>
-            </div>
-
-            <div class="row g-4">
-            <div class="col-md-4">
-                <div class="card facility-card p-3 text-center h-100">
-                    <h4>Gym Center</h4>
-                    <p>Fasilitas lengkap olahraga untuk tamu.</p>
-                </div>
-            </div>
-
-            <div class="row g-4">
-            <div class="col-md-4">
-                <div class="card facility-card p-3 text-center h-100">
-                    <h4>Spa & Massage</h4>
-                    <p>Relaksasi tubuh dengan layanan profesional.</p>
-                </div>
+                <?php } ?>
             </div>
         </div>
-    </div>
-
 </body>
 </html>

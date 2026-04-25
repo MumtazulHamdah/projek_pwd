@@ -19,7 +19,14 @@ $kamar = mysqli_fetch_all($query, MYSQLI_ASSOC);
     <link rel="stylesheet" href="css/dashboard.css">
 </head>
 <body>
-//aku tadi benerin navbar doang, yang atur layot kamar belum
+    
+<?php if(isset($_GET['status'])) : ?>
+    <div class="alert alert-success text-center m-0">
+    Booking berhasil!
+</div>
+<?php endif; ?>
+
+<!-- aku tadi benerin navbar doang, yang atur layot kamar belum -->
 <header class="navbar-custom">
     <div class="logo">
         <img src="img/logo.png" alt="Logo">
@@ -31,7 +38,7 @@ $kamar = mysqli_fetch_all($query, MYSQLI_ASSOC);
     <a href="fasilitas.php">Facilities</a>
     <a href="balroom.php">Ballroom</a>
     <a href="#location">Location</a>
-    <a href="#contact-us">Contact Us</a>
+    <a href="#contact">Contact Us</a>
     </div>
     <a href="login.php" class="btn-book">LOGIN NOW</a>
 </header>
@@ -42,7 +49,7 @@ $kamar = mysqli_fetch_all($query, MYSQLI_ASSOC);
     <div class="overlay d-flex flex-column justify-content-center align-items-center text-white">
         <h1>Welcome to Ombak Biru Hotel</h1>
         <p>Nikmati kenyamanan dengan pemandangan laut</p>
-        <a href="#" class="btn btn-light mt-3">Explore</a>
+        <a href="#rooms" class="btn btn-light mt-3">Explore</a>
     </div>
 </div>
 <div class="about-section text-center my-5">
@@ -53,7 +60,6 @@ $kamar = mysqli_fetch_all($query, MYSQLI_ASSOC);
     </div>
 
     <p>
-
         Ombak Biru Hotel adalah hotel nyaman yang terletak di dekat kawasan laut dengan pemandangan pantai yang memukau. Dikelilingi oleh keindahan alam yang mempesona, hotel ini menawarkan suasana tenang dan segar yang cocok untuk melepas penat. Dengan fasilitas lengkap dan pelayanan terbaik, Ombak Biru Hotel menjadi pilihan ideal untuk liburan santai maupun perjalanan bisnis, sambil menikmati panorama laut yang indah setiap hari.
     </p>
 </div>
@@ -215,6 +221,23 @@ $kamar = [
         </p>
     </div>
 </footer>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<?php if(isset($_GET['status']) && $_GET['status'] == 'success') { ?>
+<script>
+Swal.fire({
+    icon: 'success',
+    title: 'Booking Berhasil!',
+    text: 'Kamar berhasil dipesan 🎉',
+    timer: 2000
+});
+</script>
+<?php
+}
+?>
+
+</body>
 
 </body>
 </html>

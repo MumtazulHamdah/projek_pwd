@@ -121,7 +121,16 @@ h1, h2, h3, h4 {
     transform: translateY(-5px);
 }
 
-/* BUTTON CUSTOM */
+.card-img-top {
+    height: 200px;
+    object-fit: cover;
+}
+
+.badge {
+    font-size: 12px;
+    padding: 6px 10px;
+}
+
 .btn-custom {
     background-color: #003049;
     color: white;
@@ -137,7 +146,6 @@ h1, h2, h3, h4 {
     padding: 40px 80px;
 }
 
-/* GARIS + JUDUL */
 .title-line {
     display: flex;
     align-items: center;
