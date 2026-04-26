@@ -115,13 +115,13 @@ $kamar = mysqli_fetch_all($query, MYSQLI_ASSOC);
         <?php endforeach; ?>
 
     <?php
-$kamar = [
+    $kamar = [
     [
         "nama" => "Standard Room",
         "deskripsi" => "Nyaman untuk 2 orang",
         "harga" => "Rp 350.000 / malam",
         "fitur" => "👤 2 Tamu • 📶 WiFi • ❄️ AC • 📺 TV",
-        "gambar" => "img/standard room.jpg",
+        "gambar" => "/projek_pwd/img/standard-room.jpg",
         "badge" => "Best Value"
     ],
     [
@@ -129,7 +129,7 @@ $kamar = [
         "deskripsi" => "Lebih luas & elegan",
         "harga" => "Rp 650.000 / malam",
         "fitur" => "👤 3 Tamu • 📶 WiFi • ❄️ AC • ☕ Breakfast",
-        "gambar" => "img/deluxe room.jpg",
+        "gambar" => "/projek_pwd/img/deluxe-room.jpg",
         "badge" => "Populer"
     ],
     [
@@ -137,7 +137,7 @@ $kamar = [
         "deskripsi" => "Fasilitas terbaik & mewah",
         "harga" => "Rp 1.200.000 / malam",
         "fitur" => "👤 4 Tamu • 🛁 Bathtub • 🌊 View Laut",
-        "gambar" => "img/suite room.jpg",
+        "gambar" => "/projek_pwd/img/suite-room.jpg",
         "badge" => "Premium"
     ]
 ];
