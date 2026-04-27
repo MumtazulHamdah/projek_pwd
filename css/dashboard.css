@@ -77,15 +77,13 @@ h1, h2, h3, h4 {
     transform: scale(0.95);
 }
 
-.hero-section {
-    margin-top: 80px;
-}
 /* HERO IMAGE */
 .hero-section img {
     width: 100%;
     height: 100vh;
     object-fit: cover;
     display: block;
+    margin-top: -80pX;
 }
 
 .kamar, .testimoni {

@@ -20,12 +20,10 @@ $kamar = mysqli_fetch_all($query, MYSQLI_ASSOC);
 </head>
 <body>
     
-<?php if(isset($_GET['status'])) : ?>
-    <div class="alert alert-success text-center m-0">
-    Booking berhasil!
-</div>
-<?php endif; ?>
-
+<?php
+session_start();
+include 'koneksi.php';
+?>
 <!-- aku tadi benerin navbar doang, yang atur layot kamar belum -->
 <header class="navbar-custom">
     <div class="logo">
@@ -94,6 +92,19 @@ $kamar = mysqli_fetch_all($query, MYSQLI_ASSOC);
     <div class="row g-4">
 
     <?php foreach($kamar as $k) : ?>
+    <?php
+$today = date('Y-m-d');
+
+$q = mysqli_query($conn, "
+SELECT COUNT(*) as total FROM booking 
+WHERE kamar_id = {$k['id']}
+AND status != 'cancelled'
+AND (checkin <= '$today' AND checkout > '$today')
+");
+
+$data = mysqli_fetch_assoc($q);
+$sisa = $k['jumlah_unit'] - $data['total'];
+?>
         <div class="col-md-4 d-flex">
             <div class="card shadow w-100 d-flex flex-column">
                 <div class="position-relative">
@@ -107,6 +118,7 @@ $kamar = mysqli_fetch_all($query, MYSQLI_ASSOC);
                     <h5 class="fw-bold"><?= $k['nama']; ?></h5>
                     <p class="text-muted"><?= $k['deskripsi']; ?></p>
                     <p class="fw-bold text-primary fs-5"><?= $k['harga']; ?></p>
+                    <p class="text-success small">Sisa kamar: <?= $sisa ?></p>
                     <p class="small"><?= $k['fitur']; ?></p>
                     <a href="booking.php?id=<?= $k['id']; ?>" class="btn btn-outline-primary w-100 mt-3">Pesan</a>
                 </div>
@@ -115,32 +127,6 @@ $kamar = mysqli_fetch_all($query, MYSQLI_ASSOC);
         <?php endforeach; ?>
 
     <?php
-    $kamar = [
-    [
-        "nama" => "Standard Room",
-        "deskripsi" => "Nyaman untuk 2 orang",
-        "harga" => "Rp 350.000 / malam",
-        "fitur" => "👤 2 Tamu • 📶 WiFi • ❄️ AC • 📺 TV",
-        "gambar" => "/projek_pwd/img/standard-room.jpg",
-        "badge" => "Best Value"
-    ],
-    [
-        "nama" => "Deluxe Room",
-        "deskripsi" => "Lebih luas & elegan",
-        "harga" => "Rp 650.000 / malam",
-        "fitur" => "👤 3 Tamu • 📶 WiFi • ❄️ AC • ☕ Breakfast",
-        "gambar" => "/projek_pwd/img/deluxe-room.jpg",
-        "badge" => "Populer"
-    ],
-    [
-        "nama" => "Suite Room",
-        "deskripsi" => "Fasilitas terbaik & mewah",
-        "harga" => "Rp 1.200.000 / malam",
-        "fitur" => "👤 4 Tamu • 🛁 Bathtub • 🌊 View Laut",
-        "gambar" => "/projek_pwd/img/suite-room.jpg",
-        "badge" => "Premium"
-    ]
-];
 ?>
             </div>
         </div>
@@ -213,30 +199,27 @@ $kamar = mysqli_fetch_all($query, MYSQLI_ASSOC);
             </div>
 
         </div>
-
         <hr class="bg-light">
-
         <p class="text-center small mb-0">
             &copy; 2026 Ombak Biru Hotel | All Rights Reserved
         </p>
     </div>
 </footer>
-
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-<?php if(isset($_GET['status']) && $_GET['status'] == 'success') { ?>
+<?php if(isset($_SESSION['success'])) { ?>
 <script>
 Swal.fire({
     icon: 'success',
     title: 'Booking Berhasil!',
     text: 'Kamar berhasil dipesan 🎉',
-    timer: 2000
+    timer: 2000,
+    showConfirmButton: false
 });
 </script>
-<?php
-}
-?>
-
+<?php 
+unset($_SESSION['success']); // biar cuma muncul sekali
+} ?>
 </body>
 
 </body>
