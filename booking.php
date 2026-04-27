@@ -3,12 +3,29 @@ include 'koneksi.php';
 
 if (!isset($_GET['id'])) {
     die("ID kamar tidak ditemukan!");
-
 }
 
 $id = (int) $_GET['id'];
-$query = mysqli_query($conn, "SELECT * FROM kamar WHERE  id=$id");
+$query = mysqli_query($conn, "SELECT * FROM kamar WHERE id=$id");
 $k = mysqli_fetch_assoc($query);
+
+// =======================
+// 🔥 TAMBAHAN LOGIKA
+// =======================
+$today = date('Y-m-d');
+
+// hitung kamar yang sedang dipakai
+$q = mysqli_query($conn, "
+SELECT COUNT(*) as total FROM booking 
+WHERE kamar_id = $id
+AND status != 'cancelled'
+AND (checkin <= '$today' AND checkout > '$today')
+");
+
+$data = mysqli_fetch_assoc($q);
+
+// hitung sisa kamar
+$sisa = $k['jumlah_unit'] - $data['total'];
 ?>
 
 <!DOCTYPE html>
@@ -64,10 +81,10 @@ $k = mysqli_fetch_assoc($query);
 
                 <h3 class="mb-3"><?= $k['nama']; ?></h3>
                 <p class="text-muted"><?= $k['deskripsi']; ?></p>
+
                 <p class="price">
                     Rp <?= number_format($k['harga'],0,',','.'); ?> / malam
                 </p>
-
                 <hr>
 
                 <form action="proses_booking.php" method="POST">
@@ -95,9 +112,17 @@ $k = mysqli_fetch_assoc($query);
                         <input type="number" name="jumlah_tamu" class="form-control" min="1" required>
                     </div>
 
-                    <button type="submit" class="btn btn-primary w-100">
-                        Booking Sekarang
-                    </button>
+                    <!-- 🔥 LOGIKA BUTTON -->
+                    <?php if($sisa > 0): ?>
+                        <button type="submit" class="btn btn-primary w-100">
+                            Booking Sekarang
+                        </button>
+                    <?php else: ?>
+                        <button type="button" class="btn btn-secondary w-100" disabled>
+                            Kamar Penuh
+                        </button>
+                    <?php endif; ?>
+
                 </form>
             </div>
         </div>
