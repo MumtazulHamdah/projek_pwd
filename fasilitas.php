@@ -59,7 +59,7 @@ body {
 .facility-card.luxury .overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(transparent, rgba(0,0,00.85));
+    background: linear-gradient(transparent, rgba(0,0,0,0.85));
     color: white;
     display: flex;
     flex-direction: column;
@@ -221,7 +221,7 @@ body {
         <div class="row g-4">
             
             <?php
-            $query = mysqli_query($conn, "SELECT * FROM facilities");
+            $query = mysqli_query($conn, "SELECT * FROM fasilitas   ");
 
             while ($row = mysqli_fetch_assoc($query)) {
                 ?>
