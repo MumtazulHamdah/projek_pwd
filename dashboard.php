@@ -36,7 +36,6 @@ $kamar = mysqli_fetch_all($query, MYSQLI_ASSOC);
     <a href="#home">Home</a>
     <a href="#rooms">Rooms</a>
     <a href="fasilitas.php">Facilities</a>
-    <a href="balroom.php">Ballroom</a>
     <a href="#location">Location</a>
     <a href="#contact">Contact Us</a>
     </div>
