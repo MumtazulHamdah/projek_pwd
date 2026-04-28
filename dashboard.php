@@ -1,8 +1,6 @@
 <?php
 include 'koneksi.php';
-
 $query = mysqli_query($conn, "SELECT * FROM kamar");
-
 $kamar = mysqli_fetch_all($query, MYSQLI_ASSOC);
 ?>
 
@@ -13,10 +11,9 @@ $kamar = mysqli_fetch_all($query, MYSQLI_ASSOC);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ombak Biru Hotel</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
-    
-    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/dashboard.css?v=1000">
 </head>
 <body>
     
@@ -24,29 +21,28 @@ $kamar = mysqli_fetch_all($query, MYSQLI_ASSOC);
 session_start();
 include 'koneksi.php';
 ?>
-<!-- aku tadi benerin navbar doang, yang atur layot kamar belum -->
 <header class="navbar-custom">
     <div class="logo">
+    <a href="dashboard.php">
         <img src="img/logo.png" alt="Logo">
+    </a>
     </div>
-
     <div class="menu">
-    <a href="#home">Home</a>
-    <a href="#rooms">Rooms</a>
+    <a href="#home" class="active">Home</a>
+    <a href="#rooms" >Rooms</a>
     <a href="fasilitas.php">Facilities</a>
     <a href="#location">Location</a>
-    <a href="#contact">Contact Us</a>
+    <a href="#location" >Contact Us</a>
     </div>
-    <a href="login.php" class="btn-book">LOGIN NOW</a>
+    <a href="#rooms" class="btn-book">BOOK NOW</a>
 </header>
-
 <main>
-<div class="hero-section position-relative" id="home">
-    <img src="img/hotel.jpg" alt="Hotel Lobby" class="w-100" style="height: 90vh; object-fit: cover;">
-    <div class="overlay d-flex flex-column justify-content-center align-items-center text-white">
-        <h1>Welcome to Ombak Biru Hotel</h1>
-        <p>Nikmati kenyamanan dengan pemandangan laut</p>
-        <a href="#rooms" class="btn btn-light mt-3">Explore</a>
+<div class="hero-section" id="home">
+    <div class="overlay">
+        <div class="hero-content">
+            <h1>Welcome to Ombak Biru Hotel</h1>
+            <p>Nikmati kenyamanan dengan pemandangan laut</p>
+        </div>
     </div>
 </div>
 <div class="about-section text-center my-5">
@@ -117,7 +113,6 @@ $sisa = $k['jumlah_unit'] - $data['total'];
                     <h5 class="fw-bold"><?= $k['nama']; ?></h5>
                     <p class="text-muted"><?= $k['deskripsi']; ?></p>
                     <p class="fw-bold text-primary fs-5"><?= $k['harga']; ?></p>
-                    <p class="text-success small">Sisa kamar: <?= $sisa ?></p>
                     <p class="small"><?= $k['fitur']; ?></p>
                     <a href="booking.php?id=<?= $k['id']; ?>" class="btn btn-outline-primary w-100 mt-3">Pesan</a>
                 </div>
@@ -194,6 +189,7 @@ $sisa = $k['jumlah_unit'] - $data['total'];
                     <a href="#"><i class="bi bi-facebook"></i></a>
                     <a href="#"><i class="bi bi-instagram"></i></a>
                     <a href="#"><i class="bi bi-twitter"></i></a>
+                    <a href="login.php" class="icon-user"><i class="bi bi-person-fill"></i></a>
                 </div>
             </div>
 
