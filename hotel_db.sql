@@ -111,6 +111,29 @@ INSERT INTO `pembayaran` (`id`, `booking_id`, `metode`, `bukti_transfer`) VALUES
 (1, 1, 'Transfer Bank', 'LOGO PROJEK PWD.png');
 
 --
+-- Table structure for table `fasilitas`
+--
+
+CREATE TABLE fasilitas (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100),
+    description TEXT,
+    icon VARCHAR(50),
+    image VARCHAR(255)
+)
+
+--
+-- Dumping data for table `fasilitas`
+--
+
+INSERT INTO fasilitas (name, description, icon, image) VALUES
+('Restaurant', 'Restoran dengan menu lokal & internasional.', 'bi-cup-hot', 'restaurant.jpg'),
+('Hall', 'Cocok untuk meeting & event.', 'bi-building', 'hall.jpg'),
+('Swimming Pool', 'Kolam renang dengan view laut.', 'bi-water', 'pool.jpg'),
+('Gym Center', 'Fasilitas olahraga lengkap.', 'bi-heart-pulse', 'gym.jpg'),
+('Spa & Massage', 'Relaksasi profesional & nyaman.', 'bi-flower1', 'spa.jpg')
+
+--
 -- Indexes for dumped tables
 --
 
