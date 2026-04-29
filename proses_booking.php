@@ -1,6 +1,12 @@
 <?php
-session_start(); // WAJIB PALING ATAS
+session_start();
 include 'koneksi.php';
+
+// 🔐 WAJIB LOGIN
+if (!isset($_SESSION['user'])) {
+    header("Location: login_user.php");
+    exit;
+}
 
 $nama = $_POST['nama'];
 $kamar_id = $_POST['kamar_id'];
@@ -8,23 +14,25 @@ $checkin = $_POST['checkin'];
 $checkout = $_POST['checkout'];
 $jumlah_tamu = $_POST['jumlah_tamu'];
 
-// validasi tanggal
+// =======================
+// VALIDASI TANGGAL
+// =======================
 if ($checkout <= $checkin) {
     die("Tanggal checkout harus setelah checkin");
 }
 
 // =======================
-// 🔥 CEK STOK (ANTI OVERBOOKING)
+// CEK STOK KAMAR
 // =======================
 
-// ambil stok kamar
+// ambil stok
 $kamar = mysqli_fetch_assoc(mysqli_query($conn, "
 SELECT jumlah_unit FROM kamar WHERE id='$kamar_id'
 "));
 
 $stok = $kamar['jumlah_unit'];
 
-// hitung booking yang bentrok tanggal
+// cek bentrok
 $cek = mysqli_query($conn, "
 SELECT COUNT(*) as total FROM booking 
 WHERE kamar_id = '$kamar_id'
@@ -37,27 +45,23 @@ AND (
 $data = mysqli_fetch_assoc($cek);
 $terpakai = $data['total'];
 
-// cek ketersediaan
+// kalau penuh
 if ($terpakai >= $stok) {
     die("Maaf, kamar sudah penuh di tanggal tersebut!");
 }
 
 // =======================
-// ✅ SIMPAN BOOKING
+// SIMPAN KE SESSION
 // =======================
-$query = "INSERT INTO booking (nama, kamar_id, checkin, checkout, jumlah_tamu) 
-VALUES ('$nama', '$kamar_id', '$checkin', '$checkout', '$jumlah_tamu')";
+$_SESSION['booking_temp'] = [
+    'user_id' => $_SESSION['user']['id'], // 🔥 penting banget
+    'nama' => $nama,
+    'kamar_id' => $kamar_id,
+    'checkin' => $checkin,
+    'checkout' => $checkout,
+    'jumlah_tamu' => $jumlah_tamu
+];
 
-if (mysqli_query($conn, $query)) {
-
-    // ambil id booking terakhir
-    $booking_id = mysqli_insert_id($conn);
-
-    // 🔥 ARAHKAN KE PEMBAYARAN (BUKAN DASHBOARD LAGI)
-    header("Location: pembayaran.php?id=$booking_id");
-    exit;
-
-} else {
-    echo "Error: " . mysqli_error($conn);
-}
-?>
+// ke halaman konfirmasi
+header("Location: konfirmasi_booking.php");
+exit;

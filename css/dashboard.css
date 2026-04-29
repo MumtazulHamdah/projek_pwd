@@ -42,7 +42,9 @@ h2, h3, h4 {
 .logo a:active img {
     transform: scale(0.95);
 }  
-
+.logo {
+    margin-left: 30px;
+}
 /* MENU */
 .menu {
     display: flex;
@@ -258,3 +260,47 @@ h2, h3, h4 {
 .icon-user:hover {
     transform: scale(1.1);
 } */
+.hamburger {
+    font-size: 40px;      /* gedein ukuran */
+    color: #003049;
+    cursor: pointer;
+}
+
+/* efek hover biar hidup */
+.hamburger:hover {
+    color: #c8a96a;
+}
+.hamburger {
+    cursor: pointer;
+    font-size: 28px;
+}
+
+.dropdown-menu-custom {
+    display: none;
+    position: absolute;
+    top: 40px;
+    left: 0;
+    width: 180px; /* kecil, nggak lebar */
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+    overflow: hidden;
+    z-index: 999;
+    font-size: 14px; 
+}
+
+.dropdown-menu-custom a {
+    display: block;
+    padding: 10px 15px;
+    text-decoration: none;
+    color: #333;
+    transition: 0.2s;
+    font-size: 14px;
+    padding: 8px 12px; /* biar lebih compact */
+}
+
+.dropdown-menu-custom a:hover {
+    background: #f1f1f1;
+}
+
+

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 28, 2026 at 10:01 PM
+-- Generation Time: Apr 29, 2026 at 01:40 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -54,17 +54,9 @@ CREATE TABLE `booking` (
   `checkout` date DEFAULT NULL,
   `jumlah_tamu` int(11) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `status` varchar(20) DEFAULT 'pending'
+  `status` varchar(20) DEFAULT 'pending',
+  `user_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `booking`
---
-
-INSERT INTO `booking` (`id`, `nama`, `kamar_id`, `checkin`, `checkout`, `jumlah_tamu`, `created_at`, `status`) VALUES
-(1, 'zul', 2, '2026-04-28', '2026-04-29', 3, '2026-04-27 12:50:43', 'paid'),
-(0, 'Mumtazul Hamdah', 2, '2026-04-29', '2026-04-30', 2, '2026-04-28 14:22:31', 'pending'),
-(0, 'zul', 2, '2026-04-30', '2026-05-04', 2, '2026-04-28 17:48:41', 'pending');
 
 -- --------------------------------------------------------
 
@@ -130,17 +122,34 @@ CREATE TABLE `pembayaran` (
   `bukti_transfer` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+-- --------------------------------------------------------
+
 --
--- Dumping data for table `pembayaran`
+-- Table structure for table `users`
 --
 
-INSERT INTO `pembayaran` (`id`, `booking_id`, `metode`, `bukti_transfer`) VALUES
-(1, 1, 'Transfer Bank', 'LOGO PROJEK PWD.png'),
-(0, 0, 'Bayar di Tempat', '');
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL,
+  `username` varchar(50) DEFAULT NULL,
+  `password` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `username`, `password`) VALUES
+(1, 'zulha', '123');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `booking`
+--
+ALTER TABLE `booking`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `fasilitas`
@@ -149,14 +158,44 @@ ALTER TABLE `fasilitas`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `pembayaran`
+--
+ALTER TABLE `pembayaran`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `booking`
+--
+ALTER TABLE `booking`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `fasilitas`
 --
 ALTER TABLE `fasilitas`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `pembayaran`
+--
+ALTER TABLE `pembayaran`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

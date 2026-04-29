@@ -1,4 +1,12 @@
 <?php
+session_start();
+
+if (!isset($_SESSION['user'])) {
+    header("Location: login_user.php");
+    exit;
+}
+?>
+<?php
 include 'koneksi.php';
 
 if (!isset($_GET['id'])) {
@@ -10,11 +18,10 @@ $query = mysqli_query($conn, "SELECT * FROM kamar WHERE id=$id");
 $k = mysqli_fetch_assoc($query);
 
 // =======================
-// 🔥 TAMBAHAN LOGIKA
+// 🔥 LOGIKA KAMU (TIDAK DIUBAH)
 // =======================
 $today = date('Y-m-d');
 
-// hitung kamar yang sedang dipakai
 $q = mysqli_query($conn, "
 SELECT COUNT(*) as total FROM booking 
 WHERE kamar_id = $id
@@ -23,61 +30,84 @@ AND (checkin <= '$today' AND checkout > '$today')
 ");
 
 $data = mysqli_fetch_assoc($q);
-
-// hitung sisa kamar
 $sisa = $k['jumlah_unit'] - $data['total'];
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Booking Kamar</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
+<meta charset="UTF-8">
+<title>Booking Kamar</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
 <style>
-    body {
-        background: #f8f9fa;
-        font-family: 'Poppins', sans-serif;
-    }
+body {
+    font-family: 'Poppins', sans-serif;
+    background: url('img/hotel.jpg') no-repeat center center/cover;
+    height: 100vh;
+    margin: 0;
+}
 
-    .booking-card {
-        border-radius: 15px;
-        overflow: hidden;
-    }
+.overlay {
+    position: absolute;
+    top:0; left:0;
+    width:100%; height:100%;
+    background: rgba(0,0,0,0.6);
+}
 
-    .room-img {
-        height: 100%;
-        object-fit: cover;
-    }
+.booking-card {
+    border-radius: 15px;
+    overflow: hidden;
+    width: 900px;
+    z-index: 2;
+    position: relative;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    animation: fadeIn 0.5s ease;
+}
 
-    .price {
-        color: #c8a96a;
-        font-weight: bold;
-        font-size: 20px;
-    }
+.room-img {
+    height: 100%;
+    object-fit: cover;
+}
 
-    .btn-primary {
-        background-color: #0f2a44;
-        border: none;
-    }
+.price {
+    color: #c8a96a;
+    font-weight: bold;
+    font-size: 20px;
+}
 
-    .btn-primary:hover {
-        background-color: #0c1f33;
-    }
+.btn-primary {
+    background-color: #0f2a44;
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: #0c1f33;
+}
+
+@keyframes fadeIn {
+    from {opacity:0; transform: translateY(20px);}
+    to {opacity:1; transform: translateY(0);}
+}
 </style>
 </head>
 
-<div class="container py-5">
-    <div class="card booking-card shadow-lg">
+<body>
+
+<div class="overlay d-flex justify-content-center align-items-center">
+
+    <div class="card booking-card">
         <div class="row g-0">
 
-            <!-- IMAGE -->
+            <!-- GAMBAR -->
             <div class="col-md-5">
                 <img src="<?= $k['gambar']; ?>" class="img-fluid room-img">
             </div>
 
             <!-- FORM -->
-            <div class="col-md-7 p-4">
+            <div class="col-md-7 p-4 bg-white">
 
                 <h3 class="mb-3"><?= $k['nama']; ?></h3>
                 <p class="text-muted"><?= $k['deskripsi']; ?></p>
@@ -85,13 +115,14 @@ $sisa = $k['jumlah_unit'] - $data['total'];
                 <p class="price">
                     Rp <?= number_format($k['harga'],0,',','.'); ?> / malam
                 </p>
+
                 <hr>
 
                 <form action="proses_booking.php" method="POST">
                     <input type="hidden" name="kamar_id" value="<?= $k['id']; ?>">
 
                     <div class="mb-3">
-                        <label class="form-label">Nama Lengkap</label>
+                        <label>Nama Lengkap</label>
                         <input type="text" name="nama" class="form-control" required>
                     </div>
 
@@ -112,7 +143,7 @@ $sisa = $k['jumlah_unit'] - $data['total'];
                         <input type="number" name="jumlah_tamu" class="form-control" min="1" required>
                     </div>
 
-                    <!-- 🔥 LOGIKA BUTTON -->
+                    <!-- LOGIKA BUTTON (TETAP) -->
                     <?php if($sisa > 0): ?>
                         <button type="submit" class="btn btn-primary w-100">
                             Booking Sekarang
@@ -124,9 +155,12 @@ $sisa = $k['jumlah_unit'] - $data['total'];
                     <?php endif; ?>
 
                 </form>
+
             </div>
         </div>
     </div>
+
 </div>
+
 </body>
 </html>

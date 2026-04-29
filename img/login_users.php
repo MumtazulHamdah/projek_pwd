@@ -6,12 +6,21 @@ if(isset($_POST['login'])) {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    $query = mysqli_query($conn, "SELECT * FROM admin 
-              WHERE username='$username' AND password='$password'");
+    $stmt = mysqli_prepare($conn, "SELECT * FROM users WHERE username = ?");
+    mysqli_stmt_bind_param($stmt, "s", $username);
+    mysqli_stmt_execute($stmt);
 
-    if(mysqli_num_rows($query) > 0) {
-        $_SESSION['admin'] = $username;
-        header("Location: admin_kamar.php");
+    $result = mysqli_stmt_get_result($stmt);
+    $data = mysqli_fetch_assoc($result);
+
+    if ($data && password_verify($password, $data['password'])) {
+        $_SESSION['user'] = [
+            'id' => $data['id'],
+            'username' => $data['username']
+        ];
+
+        header("Location: dashboard.php");
+        exit;
     } else {
         $error = "Username atau password salah!";
     }
@@ -22,10 +31,9 @@ if(isset($_POST['login'])) {
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Admin Login</title>
+<title>User Login</title>
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
-
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
 <style>
@@ -76,8 +84,7 @@ body {
 
     <div class="login-card">
 
-        <h3 class="text-center login-title mb-3">Admin Login</h3>
-        <p class="text-center text-muted mb-4">Ombak Biru Hotel System</p>
+        <h3 class="text-center login-title mb-3">User Login</h3>
 
         <?php if(isset($error)) : ?>
             <div class="alert alert-danger"><?= $error; ?></div>
@@ -102,5 +109,6 @@ body {
         </form>
     </div>
 </div>
+
 </body>
 </html>
