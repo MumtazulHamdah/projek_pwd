@@ -19,7 +19,7 @@ if ($metode != "Bayar di Tempat") {
     move_uploaded_file($_FILES['bukti']['tmp_name'], "bukti/" . $bukti);
 
     // status langsung paid
-    $status = "paid";
+    $status = "menunggu_konfirmasi";
 
 } else {
 

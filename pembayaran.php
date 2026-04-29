@@ -1,21 +1,74 @@
 <?php
+session_start();
 include 'koneksi.php';
-$id = $_GET['id'];
+
+// 🔒 VALIDASI ID
+if (!isset($_GET['id']) || $_GET['id'] == 0) {
+    die("ID booking tidak valid!");
+}
+
+$id = (int) $_GET['id'];
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Pembayaran</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+<meta charset="UTF-8">
+<title>Pembayaran</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+body {
+    font-family: 'Poppins', sans-serif;
+    background: url('img/hotel.jpg') no-repeat center center/cover;
+    height: 100vh;
+    margin: 0;
+}
+
+.overlay {
+    position: absolute;
+    top:0; left:0;
+    width:100%; height:100%;
+    background: rgba(0,0,0,0.6);
+}
+
+.payment-card {
+    background: #fff;
+    border-radius: 15px;
+    padding: 30px;
+    width: 420px;
+    z-index: 2;
+    position: relative;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+.title {
+    font-weight: 600;
+    color: #0f2a44;
+}
+
+.btn-primary {
+    background-color: #0f2a44;
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: #081a2b;
+}
+</style>
 </head>
 
-<body style="background:#f8f9fa;">
+<body>
 
-<div class="container py-5">
-    <div class="card shadow p-4">
+<div class="overlay d-flex justify-content-center align-items-center">
 
-        <h3 class="mb-3 text-center">Pembayaran</h3>
+    <div class="payment-card">
+
+        <h3 class="text-center title mb-3">Pembayaran</h3>
+        <p class="text-center text-muted mb-4">Silakan lakukan pembayaran</p>
 
         <div class="mb-4">
             <p><b>Transfer ke:</b></p>
@@ -29,7 +82,7 @@ $id = $_GET['id'];
             <div class="mb-3">
                 <label class="form-label">Metode Pembayaran</label>
                 <select name="metode" id="metode" class="form-control" required onchange="toggleUpload()">
-                    <option value="">-- Pilih --</option>
+                    <option value="">-- Pilih Metode --</option>
                     <option value="Transfer Bank">Transfer Bank</option>
                     <option value="E-Wallet">E-Wallet</option>
                     <option value="Bayar di Tempat">Bayar di Tempat</option>
@@ -42,11 +95,12 @@ $id = $_GET['id'];
             </div>
 
             <button type="submit" class="btn btn-primary w-100">
-                Bayar
+                Bayar Sekarang
             </button>
         </form>
 
     </div>
+
 </div>
 
 <script>
