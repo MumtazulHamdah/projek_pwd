@@ -1,190 +1,101 @@
-<?php
-include 'koneksi.php';
-$id = $_GET['id'];
-?>
-
-<!DOCTYPE html>
-<html>
 <head>
-    <title>Pembayaran</title>
+<meta charset="UTF-8">
+<title>Pembayaran</title>
 
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
-    <style>
-        body {
-            margin: 0;
-            font-family: 'Poppins', sans-serif;
-            background: #f5f7fa;
-        }
+<style>
+body {
+    font-family: 'Poppins', sans-serif;
+    background: url('img/hotel.jpg') no-repeat center center/cover;
+    height: 100vh;
+    margin: 0;
+}
 
-        .header {
-            background: white;
-            padding: 20px 40px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+.overlay {
+    position: absolute;
+    top:0; left:0;
+    width:100%; height:100%;
+    background: rgba(0,0,0,0.6);
+}
 
-        .logo {
-            font-weight: 600;
-            font-size: 20px;
-            color: #333;
-        }
+.payment-card {
+    background: #fff;
+    border-radius: 15px;
+    padding: 30px;
+    width: 420px;
+    z-index: 2;
+    position: relative;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
 
-        .container {
-            max-width: 900px;
-            margin: 40px auto;
-            display: flex;
-            gap: 20px;
-        }
+.title {
+    font-weight: 600;
+    color: #0f2a44;
+}
 
-        .left {
-            flex: 2;
-            background: white;
-            padding: 25px;
-            border-radius: 12px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
-        }
-
-        .right {
-            flex: 1;
-            background: white;
-            padding: 20px;
-            border-radius: 12px;
-            height: fit-content;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
-        }
-
-        h2 {
-            margin-top: 0;
-            font-weight: 600;
-        }
-
-        label {
-            font-size: 14px;
-            color: #555;
-        }
-
-        select, input[type="file"] {
-            width: 100%;
-            padding: 12px;
-            margin-top: 5px;
-            border-radius: 8px;
-            border: 1px solid #ddd;
-        }
-
-        .payment-box {
-            background: #fafafa;
-            padding: 15px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-        }
-
-        .payment-box p {
-            margin: 5px 0;
-        }
-
-        button {
-            width: 100%;
-            padding: 14px;
-            background: #c8a96a; /* warna gold */
-            border: none;
-            color: white;
-            font-size: 16px;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        button:hover {
-            background: #b89655;
-        }
-
-        .summary-item {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 10px;
-        }
-
-        .total {
-            font-weight: 600;
-            font-size: 18px;
-            border-top: 1px solid #eee;
-            padding-top: 10px;
-        }
-
-    </style>
+.btn-primary {
+    background-color: #0f2a44;
+    border: none;
+}
+</style>
 </head>
+
 <body>
 
-<div class="header">
-    <div class="logo">Ombak Biru Hotel</div>
-    <div>Secure Payment</div>
-</div>
+<div class="overlay d-flex justify-content-center align-items-center">
 
-<div class="container">
+    <div class="payment-card">
 
-    <!-- LEFT FORM -->
-    <div class="left">
-        <h2>Pembayaran</h2>
+        <h3 class="text-center title mb-3">Pembayaran</h3>
+        <p class="text-center text-muted mb-4">Silakan lakukan pembayaran</p>
 
-        <div class="payment-box">
+        <div class="mb-4">
             <p><b>Transfer ke:</b></p>
-            <p>BCA - 123456789</p>
+            <p>BCA - 123456789 a.n Ombak Biru Hotel</p>
             <p>DANA - 08123456789</p>
         </div>
 
         <form action="proses_bayar.php" method="POST" enctype="multipart/form-data">
             <input type="hidden" name="booking_id" value="<?= $id ?>">
 
-            <label>Metode Pembayaran</label>
-            <select name="metode" id="metode" required>
-                <option value="">Pilih metode</option>
-                <option value="Transfer Bank">Transfer Bank</option>
-                <option value="E-Wallet">E-Wallet</option>
-                <option value="Bayar di Tempat">Bayar di Tempat</option>
-            </select>
+            <div class="mb-3">
+                <label class="form-label">Metode Pembayaran</label>
+                <select name="metode" id="metode" class="form-control" required onchange="toggleUpload()">
+                    <option value="">-- Pilih Metode --</option>
+                    <option value="Transfer Bank">Transfer Bank</option>
+                    <option value="E-Wallet">E-Wallet</option>
+                    <option value="Bayar di Tempat">Bayar di Tempat</option>
+                </select>
+            </div>
 
-            <br><br>
+            <div class="mb-3" id="uploadBukti">
+                <label class="form-label">Upload Bukti Transfer</label>
+                <input type="file" name="bukti" class="form-control">
+            </div>
 
-            <label>
-                Upload Bukti Pembayaran
-                <span id="wajib" style="color:red; display: none;">*</span>
-            </label>
-            <input type="file" name="bukti" id="bukti">
-
-            <br><br>
-
-            <button type="submit">Konfirmasi Pembayaran</button>
+            <button type="submit" class="btn btn-primary w-100">
+                Bayar Sekarang
+            </button>
         </form>
-    </div>
 
-    <!-- RIGHT SUMMARY -->
-    <div class="right">
-        <h3>Ringkasan Booking</h3>
-
-        <div class="summary-item">
-            <span>Kamar</span>
-            <span>Deluxe Room</span>
-        </div>
-
-        <div class="summary-item">
-            <span>Malam</span>
-            <span>2</span>
-        </div>
-
-        <div class="summary-item">
-            <span>Harga</span>
-            <span>Rp 800.000</span>
-        </div>
-
-        <div class="summary-item total">
-            <span>Total</span>
-            <span>Rp 1.600.000</span>
-        </div>
     </div>
 
 </div>
+
+<script>
+function toggleUpload() {
+    let metode = document.getElementById("metode").value;
+    let upload = document.getElementById("uploadBukti");
+
+    if (metode === "Bayar di Tempat") {
+        upload.style.display = "none";
+    } else {
+        upload.style.display = "block";
+    }
+}
+</script>
+
 </body>
 </html>

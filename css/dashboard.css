@@ -1,95 +1,139 @@
+/* ================= GLOBAL ================= */
 body {
-    margin: 0;
+    padding-top: 80px; /* biar ga ketutup navbar */
     color: #333;
     background-color: #f8f9fa;
     font-family: 'Poppins', sans-serif;
 }
 
-h1, h2, h3, h4 {
+h2, h3, h4 {
     font-family: 'Playfair Display', serif;
     color: #0f2a44;
 }
 
+/* ================= NAVBAR ================= */
 .navbar-custom {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     z-index: 1000;
+
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 10px 40px;
-    background-color: #0f2a44;
-    background: #ffffff;
+
+    padding: 12px 60px;
+    background: white;
     box-shadow: 0 2px 10px rgba(0,0,0,0.05);
 }
-.navbar-custom a {
-    color: #333;
-}
 
-.btn-book {
-    background-color: #003049;
-    color: white;
-    text-decoration: none;
-    padding: 8px 16px;
-    font-size: 13px;
-    clip-path: polygon(10% 0, 90% 0, 100% 50%, 90% 100%, 10% 100%, 0 50%);
-}
 
-.btn-primary {
-    background-color: #0f2a44;
-    border: none;
-}
-
-.btn-primary:hover {
-    background-color: #c8a96a;
-}
-
-.logo {
-    margin-left: -15px; 
-}
-/* LOGO */
 .logo img {
     height: 54px;
+    transition: 0.3s;
+}
+.logo a:hover img {
+    transform: scale(1.08);
+    filter: brightness(1.1);
 }
 
+/* efek klik */
+.logo a:active img {
+    transform: scale(0.95);
+}  
+.logo {
+    margin-left: 30px;
+}
 /* MENU */
 .menu {
     display: flex;
-    gap: 20px;
+    gap: 30px;
+    margin: 0 auto;
 }
 
 .menu a {
     text-decoration: none;
     color: #333;
-    font-size: 13px;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
     transition: 0.3s;
 }
 
 .menu a:hover {
     color: #c8a96a;
+}
+
+/* ACTIVE KUNING */
+.menu a.active {
+    color: #c8a96a;
+    font-weight: 700;
+}
+
+/* ================= BUTTON HEXAGON ================= */
+.btn-book {
+    background: #0f2a44 !important;
+    color: white;
+    padding: 10px 28px;
+    font-size: 13px;
+    text-decoration: none;
+    box-shadow: 0 4px 12px rgba(15, 42, 68, 0.3);
+    margin-right: 5px;
+    
+
+    clip-path: polygon(
+        15% 0%, 
+        85% 0%, 
+        100% 50%, 
+        85% 100%, 
+        15% 100%, 
+        0% 50%
+    );
+
+    display: inline-block;
     transition: 0.3s;
 }
-.menu a:active {
-    color: #003049;
+.btn-book:hover {
+    background: #003049 !important;
+    transform: scale(1.05);
+}
+
+/* ================= HERO ================= */
+.hero-section {
+    height: calc(100vh - 80px); /* FIX biar ga kepotong navbar */
+    background: url('../img/hotel.jpg') center/cover no-repeat;
+    position: relative;
+}
+
+.hero-section .overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.hero-section h1 {
+    font-size: 3rem;
+    color: white;
     font-weight: bold;
-    transform: scale(0.95);
 }
 
-/* HERO IMAGE */
-.hero-section img {
-    width: 100%;
-    height: 100vh;
-    object-fit: cover;
-    display: block;
-    margin-top: -80pX;
+.hero-content p {
+    color: white;
+    font-size: 16px;
 }
 
+/* ================= SECTION ================= */
 .kamar, .testimoni {
-    padding: 60px 0;
+    padding: 80px 0;
 }
 
+/* ================= FITUR ================= */
 .fitur .card {
     height: 100%;
     border-radius: 12px;
@@ -100,18 +144,10 @@ h1, h2, h3, h4 {
     transform: translateY(-8px);
 }
 
-.fitur h4 {
-    font-weight: 600;
-    color: #003049;
-}
-
-.fitur p {
-    color: #555;
-}
-
-/* CARD */
+/* ================= CARD ================= */
 .card {
-    border-radius: 12px;
+    border: none;
+    border-radius: 10px;
     transition: 0.3s;
 }
 
@@ -120,25 +156,11 @@ h1, h2, h3, h4 {
 }
 
 .card-img-top {
-    height: 200px;
+    height: 220px;
     object-fit: cover;
 }
 
-.badge {
-    font-size: 12px;
-    padding: 6px 10px;
-}
-
-.btn-custom {
-    background-color: #003049;
-    color: white;
-}
-
-.btn-custom:hover {
-    background-color: #002030;
-}
-
-/* ABOUT SECTION */
+/* ================= ABOUT ================= */
 .about-section {
     background: #f5f1e8;
     padding: 40px 80px;
@@ -153,81 +175,23 @@ h1, h2, h3, h4 {
 }
 
 .title-line span {
-    display: inline-block;
     width: 50px;
     height: 2px;
     background-color: #c8a96a;
-    margin: 0 10px;
 }
 
 .title-line h2 {
     margin: 0;
     font-weight: 600;
-    color: #0f2a44;
 }
 
-/* TEXT */
 .about-section p {
     max-width: 800px;
     margin: auto;
-    color: #555;
     font-size: 14px;
 }
 
-.footer-custom {
-    background-color: #0F2A44;
-}
-
-.footer-custom h4,
-.footer-custom h5 {
-    color: #C8A96A;
-}
-
-.footer-custom p {
-    font-size: 14px;
-}
-
-.footer-custom a {
-    color: #ddd;
-    text-decoration: none;
-    display: block;
-    margin-bottom: 5px;
-    transition: 0.3s;
-}
-
-.footer-custom a:hover {
-    color: #C8A96A;
-    padding-left: 5px;
-}
-
-/* SOCIAL ICON */
-.social-icons a {
-    display: inline-block;
-    color: white;
-    margin-right: 10px;
-    font-size: 18px;
-    transition: 0.3s;
-}
-
-.social-icons a:hover {
-    color: #C8A96A;
-    transform: scale(1.2);
-}
-
-.hero-section .overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0,0,0,0.5);
-}
-
-.hero-section h1 {
-    font-size: 3rem;
-    font-weight: bold;
-}
-
+/* ================= KAMAR ================= */
 .kamar .card {
     display: flex;
     flex-direction: column;
@@ -241,55 +205,7 @@ h1, h2, h3, h4 {
     justify-content: space-between;
 }
 
-.kamar .card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-}
-
-.kamar, .testimoni {
-    padding: 80px 0;
-}
-
-.kamar img {
-    height: 220px;
-    object-fit: cover;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-}
-
-.card {
-    border: none;
-    border-radius: 10px;
-}
-
-.btn-primary {
-    border-radius: 25px;
-    padding: 8px 20px;
-}
-
-.overlay {
-    background: rgba(0, 0, 0, 0.4);
-}
-
-.room-card img {
-    height: 220px;
-    object-fit: cover;
-}
-
-.room-card {
-    transition: 0.3s;
-    border-radius: 15px;
-}
-
-.room-card:hover {
-    transform: translateY(-10px);
-}
-
-.badge {
-    font-size: 12px;
-    padding: 6px 10px;
-}
-
+/* ================= TESTIMONI ================= */
 .testimoni .card {
     height: 100%;
     border-radius: 12px;
@@ -297,15 +213,94 @@ h1, h2, h3, h4 {
 
 .testimoni p {
     font-style: italic;
-    color: #555;
 }
 
 .testimoni h6 {
     font-weight: 600;
-    color: #003049;
 }
 
-.testimoni .card:hover {
-    transform: translateY(-8px);
-    transition: 0.3s;
+/* ================= FOOTER ================= */
+.footer-custom {
+    background-color: #0F2A44;
 }
+
+.footer-custom h4,
+.footer-custom h5 {
+    color: #C8A96A;
+}
+
+.footer-custom a {
+    color: #ddd;
+    text-decoration: none;
+}
+
+.footer-custom a:hover {
+    color: #C8A96A;
+}
+
+/* ================= SOCIAL ================= */
+.social-icons a {
+    color: white;
+    margin-right: 10px;
+    font-size: 18px;
+    gap: 5px; 
+}
+
+.social-icons a:hover {
+    color: #C8A96A;
+}
+/* .icon-user {
+    font-size: 22px;
+    color: #0f2a44;
+    text-decoration: none;
+    transition: 0.3s;
+   
+    
+}
+.icon-user:hover {
+    transform: scale(1.1);
+} */
+.hamburger {
+    font-size: 40px;      /* gedein ukuran */
+    color: #003049;
+    cursor: pointer;
+}
+
+/* efek hover biar hidup */
+.hamburger:hover {
+    color: #c8a96a;
+}
+.hamburger {
+    cursor: pointer;
+    font-size: 28px;
+}
+
+.dropdown-menu-custom {
+    display: none;
+    position: absolute;
+    top: 40px;
+    left: 0;
+    width: 180px; /* kecil, nggak lebar */
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+    overflow: hidden;
+    z-index: 999;
+    font-size: 14px; 
+}
+
+.dropdown-menu-custom a {
+    display: block;
+    padding: 10px 15px;
+    text-decoration: none;
+    color: #333;
+    transition: 0.2s;
+    font-size: 14px;
+    padding: 8px 12px; /* biar lebih compact */
+}
+
+.dropdown-menu-custom a:hover {
+    background: #f1f1f1;
+}
+
+

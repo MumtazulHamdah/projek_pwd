@@ -1,9 +1,12 @@
 <?php
+session_start();
 include 'koneksi.php';
 
 $query = mysqli_query($conn, "SELECT * FROM kamar");
-
 $kamar = mysqli_fetch_all($query, MYSQLI_ASSOC);
+
+// ambil user_id (aman)
+$user_id = $_SESSION['user']['id'] ?? null;
 ?>
 
 <!DOCTYPE html>
@@ -13,125 +16,117 @@ $kamar = mysqli_fetch_all($query, MYSQLI_ASSOC);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ombak Biru Hotel</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
-    
-    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/dashboard.css?v=1000">
 </head>
 <body>
+
+<header class="navbar-custom d-flex align-items-center justify-content-between px-3">
+    <div class="d-flex align-items-center gap-3">
+    <div class="hamburger position-relative">
+    <i class="bi bi-list" id="hamburgerBtn"></i>
+
+    <div class="dropdown-menu-custom" id="menuDropdown">
+        <a href="riwayat.php">My Booking</a>
+        <a href="logout.php">Logout</a>
+    </div>
+</div>
     
-<?php
-session_start();
-include 'koneksi.php';
-?>
-<!-- aku tadi benerin navbar doang, yang atur layot kamar belum -->
-<header class="navbar-custom">
+
     <div class="logo">
-        <img src="img/logo.png" alt="Logo">
+        <a href="dashboard.php">
+            <img src="img/logo.png" alt="Logo">
+        </a>
+    </div>
+</div>
+    <div class="menu">
+        <a href="#home" class="active">Home</a>
+        <a href="#rooms">Rooms</a>
+        <a href="fasilitas.php">Facilities</a>
+        <a href="#location">Location</a>
+        <a href="#location">Contact Us</a>
     </div>
 
-    <div class="menu">
-    <a href="#home">Home</a>
-    <a href="#rooms">Rooms</a>
-    <a href="fasilitas.php">Facilities</a>
-    <a href="#location">Location</a>
-    <a href="#contact">Contact Us</a>
+    <div class="d-flex align-items-center">
+        <a href="#rooms" class="btn-book">BOOK NOW</a>
+
+        <?php if(isset($_SESSION['user'])): ?>
+            <span class="fw-bold ms-2"><?= $_SESSION['user']['username']; ?></span>
+        <?php else: ?>
+            <a href="login_user.php" class="btn-book ms-2">Login</a>
+        <?php endif; ?>
     </div>
-    <a href="login.php" class="btn-book">LOGIN NOW</a>
 </header>
 
 <main>
-<div class="hero-section position-relative" id="home">
-    <img src="img/hotel.jpg" alt="Hotel Lobby" class="w-100" style="height: 90vh; object-fit: cover;">
-    <div class="overlay d-flex flex-column justify-content-center align-items-center text-white">
-        <h1>Welcome to Ombak Biru Hotel</h1>
-        <p>Nikmati kenyamanan dengan pemandangan laut</p>
-        <a href="#rooms" class="btn btn-light mt-3">Explore</a>
+
+<div class="hero-section" id="home">
+    <div class="overlay">
+        <div class="hero-content">
+            <h1>Welcome to Ombak Biru Hotel</h1>
+            <p>Nikmati kenyamanan dengan pemandangan laut</p>
+        </div>
     </div>
 </div>
+
 <div class="about-section text-center my-5">
     <div class="title-line">
         <span></span>
         <h2>Ombak Biru Hotel</h2>
         <span></span>
     </div>
-
     <p>
         Ombak Biru Hotel adalah hotel nyaman yang terletak di dekat kawasan laut dengan pemandangan pantai yang memukau. Dikelilingi oleh keindahan alam yang mempesona, hotel ini menawarkan suasana tenang dan segar yang cocok untuk melepas penat. Dengan fasilitas lengkap dan pelayanan terbaik, Ombak Biru Hotel menjadi pilihan ideal untuk liburan santai maupun perjalanan bisnis, sambil menikmati panorama laut yang indah setiap hari.
     </p>
 </div>
-<div class="container fitur text-center my-5" id="facilities">
-    <div class="row g-4">
-
-        <div class="col-md-4 d-flex">
-            <div class="card p-4 shadow w-100 d-flex flex-column justify-content-center fitur-card">
-                <h4>Kamar Nyaman</h4>
-                <p>Kamar bersih dan nyaman untuk istirahat.</p>
-            </div>
-        </div>
-
-        <div class="col-md-4 d-flex">
-            <div class="card p-4 shadow w-100 d-flex flex-column justify-content-center fitur-card">
-                <h4>Harga Terjangkau</h4>
-                <p>Harga terbaik untuk semua kalangan.</p>
-            </div>
-        </div>
-
-        <div class="col-md-4 d-flex">
-            <div class="card p-4 shadow w-100 d-flex flex-column justify-content-center fitur-card">
-                <h4>Lokasi Strategis</h4>
-                <p>Dekat dengan tempat wisata populer.</p>
-            </div>  
-        </div>
-    </div>
-</div>
 
 <div class="container kamar text-center my-5" id="rooms">
-    <h2 class=" text-center mb-5 fw-bold">Pilihan Kamar</h2>
+    <h2 class="mb-5 fw-bold">Pilihan Kamar</h2>
     <div class="row g-4">
 
     <?php foreach($kamar as $k) : ?>
     <?php
-$today = date('Y-m-d');
+    $today = date('Y-m-d');
 
-$q = mysqli_query($conn, "
-SELECT COUNT(*) as total FROM booking 
-WHERE kamar_id = {$k['id']}
-AND status != 'cancelled'
-AND (checkin <= '$today' AND checkout > '$today')
-");
+    $q = mysqli_query($conn, "
+    SELECT COUNT(*) as total FROM booking 
+    WHERE kamar_id = {$k['id']}
+    AND status != 'cancelled'
+    AND (checkin <= '$today' AND checkout > '$today')
+    ");
 
-$data = mysqli_fetch_assoc($q);
-$sisa = $k['jumlah_unit'] - $data['total'];
-?>
-        <div class="col-md-4 d-flex">
-            <div class="card shadow w-100 d-flex flex-column">
-                <div class="position-relative">
-                    <img src="<?= $k['gambar']; ?>" class="card-img-top">
-                    <span class="badge bg-primary position-absolute top-0 end-0 m-2">
-                        <?= $k['badge']; ?>
-                    </span>
-                </div>
+    $data = mysqli_fetch_assoc($q);
+    $sisa = $k['jumlah_unit'] - $data['total'];
+    ?>
 
-                <div class="card-body text-center">
-                    <h5 class="fw-bold"><?= $k['nama']; ?></h5>
-                    <p class="text-muted"><?= $k['deskripsi']; ?></p>
-                    <p class="fw-bold text-primary fs-5"><?= $k['harga']; ?></p>
-                    <p class="text-success small">Sisa kamar: <?= $sisa ?></p>
-                    <p class="small"><?= $k['fitur']; ?></p>
-                    <a href="booking.php?id=<?= $k['id']; ?>" class="btn btn-outline-primary w-100 mt-3">Pesan</a>
-                </div>
+    <div class="col-md-4 d-flex">
+        <div class="card shadow w-100 d-flex flex-column">
+            <div class="position-relative">
+                <img src="<?= $k['gambar']; ?>" class="card-img-top">
+                <span class="badge bg-primary position-absolute top-0 end-0 m-2">
+                    <?= $k['badge']; ?>
+                </span>
+            </div>
+
+            <div class="card-body text-center">
+                <h5 class="fw-bold"><?= $k['nama']; ?></h5>
+                <p class="text-muted"><?= $k['deskripsi']; ?></p>
+                <p class="fw-bold text-primary fs-5"><?= $k['harga']; ?></p>
+                <p class="small"><?= $k['fitur']; ?></p>
+                <a href="booking.php?id=<?= $k['id']; ?>" class="btn btn-outline-primary w-100 mt-3">
+                    Pesan
+                </a>
             </div>
         </div>
-        <?php endforeach; ?>
+    </div>
 
-    <?php
-?>
-            </div>
-        </div>
+    <?php endforeach; ?>
+    </div>
+</div>
 
-
-        <div class="container testimoni text-center my-5">
+<!-- TESTIMONI -->
+<div class="container testimoni text-center my-5">
     <h2 class="mb-4">Testimoni Pengunjung</h2>
     <div class="row g-4">
 
@@ -158,6 +153,7 @@ $sisa = $k['jumlah_unit'] - $data['total'];
 
     </div>
 </div>
+
 </main>
 
 <!-- FOOTER -->
@@ -165,13 +161,11 @@ $sisa = $k['jumlah_unit'] - $data['total'];
     <div class="container">
         <div class="row">
 
-            <!-- BRAND -->
             <div class="col-md-4 mb-4">
                 <h4 class="fw-bold">Ombak Biru Hotel</h4>
                 <p>Nikmati kenyamanan menginap dengan pemandangan laut yang indah dan suasana tenang.</p>
             </div>
 
-            <!-- MENU -->
             <div class="col-md-4 mb-4">
                 <h5 class="fw-bold">Menu</h5>
                 <ul class="list-unstyled">
@@ -182,28 +176,31 @@ $sisa = $k['jumlah_unit'] - $data['total'];
                 </ul>
             </div>
 
-            <!-- CONTACT -->
-            <div class="col-md-4 mb-4" id="location" >
+            <div class="col-md-4 mb-4" id="location">
                 <h5 class="fw-bold">Contact</h5>
                 <p>📍 Yogyakarta, Indonesia</p>
                 <p>📞 0812-3456-7890</p>
                 <p>✉️ ombakbiru@email.com</p>
 
-                <!-- SOCIAL MEDIA -->
                 <div class="social-icons mt-3">
                     <a href="#"><i class="bi bi-facebook"></i></a>
                     <a href="#"><i class="bi bi-instagram"></i></a>
                     <a href="#"><i class="bi bi-twitter"></i></a>
+                    <a href="login_admin.php" class="icon-user">
+                        <i class="bi bi-person-fill"></i>
+                    </a>
                 </div>
             </div>
 
         </div>
+
         <hr class="bg-light">
         <p class="text-center small mb-0">
             &copy; 2026 Ombak Biru Hotel | All Rights Reserved
         </p>
     </div>
 </footer>
+
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <?php if(isset($_SESSION['success'])) { ?>
@@ -216,10 +213,31 @@ Swal.fire({
     showConfirmButton: false
 });
 </script>
-<?php 
-unset($_SESSION['success']); // biar cuma muncul sekali
-} ?>
-</body>
+<?php unset($_SESSION['success']); } ?>
 
+<!-- 🔥 SCRIPT KAMU TARUH DI SINI -->
+<script>
+const btn = document.getElementById("hamburgerBtn");
+const menu = document.getElementById("menuDropdown");
+const btnBooking = document.getElementById("btnBooking");
+const riwayat = document.getElementById("riwayatBooking");
+
+btn.addEventListener("click", function() {
+    menu.style.display = menu.style.display === "block" ? "none" : "block";
+});
+
+document.addEventListener("click", function(e) {
+    if (!btn.contains(e.target) && !menu.contains(e.target)) {
+        menu.style.display = "none";
+    }
+});
+
+btnBooking.addEventListener("click", function(e) {
+    e.preventDefault();
+    riwayat.style.display = "block";
+    riwayat.scrollIntoView({ behavior: "smooth" });
+    menu.style.display = "none";
+});
+</script>
 </body>
 </html>
