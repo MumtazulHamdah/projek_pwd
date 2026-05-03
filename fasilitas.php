@@ -287,11 +287,13 @@ body {
         ?>
         <div class="col-md-4">
             <div class="facility-card overlay-card">
-                <img src="img/<?php echo $row['gambar']; ?>">
+                <img src="img/<?php echo $row['image']; ?>">
                 <div class="overlay">
                     <i class="bi <?php echo $row['icon']; ?>"></i>
-                    <h5><?php echo $row['nama']; ?></h5>
-                    <p><?php echo $row['deskripsi']; ?></p>
+                    <h5><?php echo $row['name']; ?></h5>
+                    <p><?php echo $row['description']; ?></p>
+
+                    <a href="booking_fasilitas.php?id=<?php echo $row['id']; ?>" class="btn btn-warning mt-2">Book Now</a>
                 </div>
             </div>
         </div>
@@ -312,6 +314,7 @@ body {
                     <h4>Grand Ballroom</h4>
                     <p>Kapasitas hingga 500 tamu</p>
                     <span>Rp 15.000.000 / event</span>
+                    <a href="booking_fasilitas.php?id=<?php echo $row['id']; ?>" class="btn btn-warning mt-2">Book Now</a>
                 </div>
             </div>
         </div>
@@ -323,6 +326,7 @@ body {
                     <h4>Mini Ballroom</h4>
                     <p>Kapasitas hingga 150 tamu</p>
                     <span>Rp 5.000.000 / event</span>
+                    <a href="booking_fasilitas.php?id=<?php echo $row['id']; ?>" class="btn btn-warning mt-2">Book Now</a>
                 </div>
             </div>
         </div>
