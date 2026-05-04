@@ -10,11 +10,36 @@ if (!$user_id) {
 }
 
 $booking = mysqli_query($conn, "
-SELECT booking.*, kamar.nama AS nama_kamar 
-FROM booking 
+
+-- KAMAR
+SELECT 
+    booking.id,
+    booking.nama,
+    kamar.nama AS item,
+    booking.checkin AS tgl1,
+    booking.checkout AS tgl2,
+    booking.status,
+    'kamar' AS tipe
+FROM booking
 JOIN kamar ON booking.kamar_id = kamar.id
 WHERE booking.user_id = '$user_id'
-ORDER BY booking.id DESC
+UNION
+
+-- FASILITAS
+SELECT 
+    booking_fasilitas.id,
+    booking_fasilitas.nama,
+    fasilitas.nama AS item,
+    booking_fasilitas.tanggal AS tgl1,
+    NULL AS tgl2,
+    booking_fasilitas.status,
+    'fasilitas' AS tipe
+FROM booking_fasilitas
+JOIN fasilitas ON booking_fasilitas.fasilitas_id = fasilitas.id
+WHERE booking_fasilitas.user_id = '$user_id'
+
+ORDER BY id DESC
+
 ");
 ?>
 
@@ -67,7 +92,7 @@ body {
 /* ===== HERO FULL ===== */
 .hero-section {
     width: 100%;
-    height: 100vh;
+    height: 150vh;
     background: url('img/hotel.jpg') center / cover no-repeat;
     position: relative;
 }
@@ -83,7 +108,7 @@ body {
 .riwayat-wrapper {
     display: flex;
     justify-content: center;
-    margin-top: -350px; /* 🔥 atur naik turun disini */
+    margin-top: -800px; /* 🔥 atur naik turun disini */
     padding: 0 20px;
 }
 
@@ -141,7 +166,7 @@ body {
 <thead>
 <tr>
     <th>Nama</th>
-    <th>Kamar</th>
+    <th>Item</th>
     <th>Tanggal</th>
     <th>Status</th>
     <th>Aksi</th>
@@ -152,8 +177,14 @@ body {
 <?php while($row = mysqli_fetch_assoc($booking)) : ?>
 <tr>
     <td><?= $row['nama']; ?></td>
-    <td><?= $row['nama_kamar']; ?></td>
-    <td><?= $row['checkin']; ?> - <?= $row['checkout']; ?></td>
+     <td>
+        <?= $row['item']; ?> 
+        (<?= ucfirst($row['tipe']); ?>)
+    </td>
+    <td>
+        <?= $row['tgl1']; ?>
+        <?= $row['tgl2'] ? ' - '.$row['tgl2'] : ''; ?>
+    </td>
 
     <td>
         <?php if($row['status'] == 'pending'): ?>
@@ -168,20 +199,18 @@ body {
     </td>
 
     <td>
-        <?php if($row['status'] == 'pending' || $row['status'] == 'menunggu_konfirmasi'): ?>
+        <?php if($row['status'] == 'pending'): ?>
             
-            <a href="cancel_booking.php?id=<?= $row['id']; ?>" 
+            <a href="cancel_booking.php?id=<?= $row['id']; ?>&tipe=<?= $row['tipe']; ?>" 
                class="btn btn-danger btn-sm"
-               onclick="return confirm('Yakin mau cancel booking?')">
+               onclick="return confirm('Yakin mau cancel?')">
                Cancel
             </a>
 
         <?php else: ?>
-            
             <button class="btn btn-disabled btn-sm" disabled>
                 Tidak bisa dibatalkan
             </button>
-
         <?php endif; ?>
     </td>
 

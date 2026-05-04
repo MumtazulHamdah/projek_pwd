@@ -59,6 +59,7 @@ body {
 
         <form action="proses_bayar.php" method="POST" enctype="multipart/form-data">
             <input type="hidden" name="booking_id" value="<?= $id ?>">
+            <input type="hidden" name="tipe" value="<?= $_GET['tipe'] ?>">
 
             <div class="mb-3">
                 <label class="form-label">Metode Pembayaran</label>

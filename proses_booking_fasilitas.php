@@ -1,14 +1,34 @@
 <?php
-include 'config.php';
+session_start();
+include 'koneksi.php';
 
-$fasilitas_id = $_POST['fasilitas_id'];
-$nama = $_POST['nama'];
-$tanggal = $_POST['tanggal'];
-$jumlah = $_POST['jumlah'];
+if(!isset($_SESSION['user'])){
+    header("Location: login_user.php");
+    exit;
+}
 
-mysqli_query($conn, " INSERT INTO booking_fasilitas (fasilitas_id, nama, tanggal, jumlah)
-VALUES ('$fasilitas_id', '$nama', '$tanggal', '$jumlah')
+// ambil dari session
+$user_id = $_SESSION['user']['id'];
+
+// ambil dari form
+$fasilitas_id = (int) $_POST['fasilitas_id'];
+$nama         = $_POST['nama'];
+$tanggal      = $_POST['tanggal'];
+
+
+$status = 'pending';
+
+mysqli_query($conn, "
+INSERT INTO booking_fasilitas 
+(user_id, fasilitas_id, nama, tanggal, status)
+VALUES 
+('$user_id', '$fasilitas_id', '$nama', '$tanggal', '$status')
 ");
 
-echo "Booking berhasil!";
+// ambil ID booking terakhir
+$booking_id = mysqli_insert_id($conn);
+
+// 🔥 arahkan ke pembayaran (INI YANG PENTING)
+header("Location: pembayaran.php?tipe=fasilitas&id=$booking_id");
+exit;
 ?>

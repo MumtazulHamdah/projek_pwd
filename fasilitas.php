@@ -1,4 +1,6 @@
-<?php include 'config.php'; ?>
+<?php 
+session_start(); 
+include 'koneksi.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,9 +14,15 @@
 
 <style>
 body {
+    padding-top: 80px; /* biar ga ketutup navbar */
+    color: #333;
+    background-color: #f8f9fa;
     font-family: 'Poppins', sans-serif;
-    background: #f8f9fa;
-    padding-top: 80px;
+}
+
+h2, h3, h4 {
+    font-family: 'Playfair Display', serif;
+    color: #0f2a44;
 }
 
 /* ================= NAVBAR ================= */
@@ -27,11 +35,13 @@ body {
 
     display: flex;
     align-items: center;
+    justify-content: space-between;
 
     padding: 12px 60px;
     background: white;
     box-shadow: 0 2px 10px rgba(0,0,0,0.05);
 }
+
 
 .logo img {
     height: 54px;
@@ -46,8 +56,10 @@ body {
 .logo a:active img {
     transform: scale(0.95);
 }  
-
-/* MENU TENGAH */
+.logo {
+    margin-left: 30px;
+}
+/* MENU */
 .menu {
     display: flex;
     gap: 30px;
@@ -73,6 +85,7 @@ body {
     font-weight: 700;
 }
 
+/* ================= BUTTON HEXAGON ================= */
 .btn-book {
     background: #0f2a44 !important;
     color: white;
@@ -99,6 +112,7 @@ body {
     background: #003049 !important;
     transform: scale(1.05);
 }
+
 /* ================= HERO ================= */
 .hero-facilities {
     background: url('img/hotel.jpg') center/cover no-repeat;
@@ -182,14 +196,15 @@ body {
 .facility-card.luxury {
     position: relative;
     overflow: hidden;
-    border-radius: 15px;
+    border-radius: 10px;
 }
 
 .facility-card.luxury img {
     width: 100%;
-    height: 280px;
+    height: auto;
+    max-height: 400px;
     object-fit: cover;
-    transition: 0.5s;
+    border-radius: 15px;
 }
 
 .facility-card.luxury .overlay {
@@ -211,6 +226,7 @@ body {
 .facility-card.luxury:hover img {
     transform: scale(1.1);
 }
+
 /* ================= FOOTER ================= */
 .footer-custom {
     background-color: #0F2A44;
@@ -244,13 +260,12 @@ body {
 
 <body>
 
-<!-- NAVBAR -->
-<header class="navbar-custom">
+<header class="navbar-custom d-flex align-items-center justify-content-between px-3">
     <div class="logo">
-    <a href="dashboard.php">
-        <img src="img/logo.png">
+        <a href="dashboard.php">
+            <img src="img/logo.png" alt="Logo">
+        </a>
     </div>
-
     <div class="menu">
         <a href="dashboard.php">Home</a>
         <a href="dashboard.php#rooms">Rooms</a>
@@ -258,8 +273,30 @@ body {
         <a href="fasilitas.php#location">Location</a>
         <a href="fasilitas.php#location">Contact Us</a>
     </div>
-    <a href="#fasilitas" class="btn-book">BOOK NOW</a>
-    
+
+    <div class="d-flex align-items-center">
+        <a href="#fasilitas" class="btn-book">BOOK NOW</a>
+
+        <?php if(isset($_SESSION['user'])): ?>
+    <div class="dropdown ms-3">
+        <a href="#" 
+           class="d-flex align-items-center text-decoration-none fw-semibold text-dark"
+           data-bs-toggle="dropdown">
+
+            <?= $_SESSION['user']['username']; ?>
+            <i class="bi bi-person-circle ms-2"></i>
+        </a>
+
+        <ul class="dropdown-menu dropdown-menu-end mt-2">
+            <li><a class="dropdown-item" href="riwayat.php">My Booking</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item text-danger" href="logout.php">Logout</a></li>
+        </ul>
+    </div>
+<?php else: ?>
+    <a href="login_user.php" class="btn-book ms-2">Login</a>
+<?php endif; ?>
+
 </header>
 
 <!-- HERO -->
@@ -287,11 +324,12 @@ body {
         ?>
         <div class="col-md-4">
             <div class="facility-card overlay-card">
-                <img src="img/<?php echo $row['image']; ?>">
+                <img src="img/<?php echo $row['gambar']; ?>">
                 <div class="overlay">
                     <i class="bi <?php echo $row['icon']; ?>"></i>
-                    <h5><?php echo $row['name']; ?></h5>
-                    <p><?php echo $row['description']; ?></p>
+                    <h5><?php echo $row['nama']; ?></h5>
+                    <p><?php echo $row['deskripsi']; ?></p>
+                    <span>Rp <?php echo $row['harga']; ?></span>
 
                     <a href="booking_fasilitas.php?id=<?php echo $row['id']; ?>" class="btn btn-warning mt-2">Book Now</a>
                 </div>
@@ -303,35 +341,22 @@ body {
 
 <!-- BALLROOM -->
 <div class="container my-5">
-    <h2 class="text-center mb-4">Ballroom & Events</h2>
-    <p class="text-center text-muted mb-5">Nikmati ruang event mewah untuk momen spesial</p>
+    <h2 class="text-center mb-4">Swimming Pool</h2>
+    <p class="text-center text-muted mb-5">Kolam renang dengan view laut</p>
 
-    <div class="row g-4">
-        <div class="col-md-6">
+    <div class="row justify-content-center">
+    <div class="col-md-8">
             <div class="facility-card luxury">
-                <img src="img/ballroom1.jpg">
+                <img src="img/swimming-pool.jpg">
                 <div class="overlay"> 
-                    <h4>Grand Ballroom</h4>
-                    <p>Kapasitas hingga 500 tamu</p>
-                    <span>Rp 15.000.000 / event</span>
-                    <a href="booking_fasilitas.php?id=<?php echo $row['id']; ?>" class="btn btn-warning mt-2">Book Now</a>
+                    <h5 class="text-white">Swimming Pool</h4>
+                    <p>Fasilitas umum bagi tamu yang menginap</p>
                 </div>
             </div>
+        </div>
+        </div>
         </div>
 
-        <div class="col-md-6">
-            <div class="facility-card luxury">
-                <img src="img/ballroom2.jpg">
-                <div class="overlay">
-                    <h4>Mini Ballroom</h4>
-                    <p>Kapasitas hingga 150 tamu</p>
-                    <span>Rp 5.000.000 / event</span>
-                    <a href="booking_fasilitas.php?id=<?php echo $row['id']; ?>" class="btn btn-warning mt-2">Book Now</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 <!-- FOOTER -->
 <footer class="footer-custom text-white pt-5 pb-3">
     <div class="container">

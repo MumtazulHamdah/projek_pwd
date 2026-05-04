@@ -63,5 +63,5 @@ $_SESSION['booking_temp'] = [
 ];
 
 // ke halaman konfirmasi
-header("Location: konfirmasi_booking.php");
+header("Location: konfirmasi_data.php");
 exit;

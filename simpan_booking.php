@@ -31,5 +31,5 @@ $booking_id = mysqli_insert_id($conn);
 unset($_SESSION['booking_temp']);
 
 // redirect ke pembayaran
-header("Location: pembayaran.php?id=$booking_id");
+header("Location: pembayaran.php?tipe=kamar&id=$booking_id");
 exit;

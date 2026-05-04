@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 29, 2026 at 01:40 PM
+-- Generation Time: May 04, 2026 at 09:42 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -55,7 +55,27 @@ CREATE TABLE `booking` (
   `jumlah_tamu` int(11) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `status` varchar(20) DEFAULT 'pending',
-  `user_id` int(11) DEFAULT NULL
+  `user_id` int(11) DEFAULT NULL,
+  `pembayaran_id` int(11) DEFAULT NULL,
+  `metode` varchar(20) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `booking_fasilitas`
+--
+
+CREATE TABLE `booking_fasilitas` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `fasilitas_id` int(11) DEFAULT NULL,
+  `nama` varchar(100) DEFAULT NULL,
+  `tanggal` date DEFAULT NULL,
+  `status` varchar(20) DEFAULT 'pending',
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `pembayaran_id` int(11) DEFAULT NULL,
+  `metode` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -69,19 +89,18 @@ CREATE TABLE `fasilitas` (
   `nama` varchar(100) DEFAULT NULL,
   `deskripsi` text DEFAULT NULL,
   `icon` varchar(50) DEFAULT NULL,
-  `gambar` varchar(255) DEFAULT NULL
+  `gambar` varchar(255) DEFAULT NULL,
+  `harga` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `fasilitas`
 --
 
-INSERT INTO `fasilitas` (`id`, `nama`, `deskripsi`, `icon`, `gambar`) VALUES
-(1, 'Restaurant', 'Restoran dengan menu lokal & internasional.', 'bi-cup-hot', 'restaurant.jpg'),
-(2, 'Hall', 'Cocok untuk meeting & event.', 'bi-building', 'hall.jpg'),
-(3, 'Swimming Pool', 'Kolam renang dengan view laut.', 'bi-water', 'swimming-pool.jpg'),
-(4, 'Gym Center', 'Fasilitas olahraga lengkap.', 'bi-heart-pulse', 'gym.jpg'),
-(5, 'Spa & Massage', 'Relaksasi profesional & nyaman.', 'bi-flower1', 'spa.jpg');
+INSERT INTO `fasilitas` (`id`, `nama`, `deskripsi`, `icon`, `gambar`, `harga`) VALUES
+(1, 'Restaurant', 'Paket makan buffet untuk 30 tamu, termasuk menu lokal & internasional serta minuman.', 'bi-cup-hot', 'restaurant.jpg', 3000000),
+(2, 'Hall', 'Paket sewa hall untuk 120 orang, termasuk fasilitas standar.', 'bi-building', 'hall.jpg', 3500000),
+(6, 'Mini Ballroom', 'Paket sewa mini ballroom untuk 150 tamu, termasuk fasilitas standar.', 'bi-building', 'ballroom2.jpg', 5000000);
 
 -- --------------------------------------------------------
 
@@ -117,9 +136,11 @@ INSERT INTO `kamar` (`id`, `nama`, `deskripsi`, `harga`, `fitur`, `gambar`, `bad
 
 CREATE TABLE `pembayaran` (
   `id` int(11) NOT NULL,
-  `booking_id` int(11) DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL,
   `metode` varchar(50) DEFAULT NULL,
-  `bukti_transfer` varchar(255) DEFAULT NULL
+  `bukti_transfer` varchar(255) DEFAULT NULL,
+  `status` varchar(20) DEFAULT 'pending',
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -152,6 +173,12 @@ ALTER TABLE `booking`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `booking_fasilitas`
+--
+ALTER TABLE `booking_fasilitas`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `fasilitas`
 --
 ALTER TABLE `fasilitas`
@@ -180,10 +207,16 @@ ALTER TABLE `booking`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `booking_fasilitas`
+--
+ALTER TABLE `booking_fasilitas`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `fasilitas`
 --
 ALTER TABLE `fasilitas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `pembayaran`
