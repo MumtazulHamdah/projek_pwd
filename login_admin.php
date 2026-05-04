@@ -8,7 +8,6 @@ if(isset($_POST['login'])) {
 
     // query ke tabel admin
     $query = mysqli_query($conn, "SELECT * FROM admin WHERE username='$username'");
-
     $data = mysqli_fetch_assoc($query);
 
     if($data){
@@ -21,8 +20,6 @@ if(isset($_POST['login'])) {
             $error = "Password salah!";
         }
 
-        // 🔥 kalau nanti mau lebih aman pakai ini:
-        // if(password_verify($password, $data['password'])){
     } else {
         $error = "Username tidak ditemukan!";
     }

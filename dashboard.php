@@ -23,23 +23,11 @@ $user_id = $_SESSION['user']['id'] ?? null;
 <body>
 
 <header class="navbar-custom d-flex align-items-center justify-content-between px-3">
-    <div class="d-flex align-items-center gap-3">
-    <div class="hamburger position-relative">
-    <i class="bi bi-list" id="hamburgerBtn"></i>
-
-    <div class="dropdown-menu-custom" id="menuDropdown">
-        <a href="riwayat.php">My Booking</a>
-        <a href="logout.php">Logout</a>
-    </div>
-</div>
-    
-
     <div class="logo">
         <a href="dashboard.php">
             <img src="img/logo.png" alt="Logo">
         </a>
     </div>
-</div>
     <div class="menu">
         <a href="#home" class="active">Home</a>
         <a href="#rooms">Rooms</a>
@@ -52,10 +40,24 @@ $user_id = $_SESSION['user']['id'] ?? null;
         <a href="#rooms" class="btn-book">BOOK NOW</a>
 
         <?php if(isset($_SESSION['user'])): ?>
-            <span class="fw-bold ms-2"><?= $_SESSION['user']['username']; ?></span>
-        <?php else: ?>
-            <a href="login_user.php" class="btn-book ms-2">Login</a>
-        <?php endif; ?>
+    <div class="dropdown ms-3">
+        <a href="#" 
+           class="d-flex align-items-center text-decoration-none fw-semibold text-dark"
+           data-bs-toggle="dropdown">
+
+            <?= $_SESSION['user']['username']; ?>
+            <i class="bi bi-person-circle ms-2"></i>
+        </a>
+
+        <ul class="dropdown-menu dropdown-menu-end mt-2">
+            <li><a class="dropdown-item" href="riwayat.php">My Booking</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item text-danger" href="logout.php">Logout</a></li>
+        </ul>
+    </div>
+<?php else: ?>
+    <a href="login_user.php" class="btn-book ms-2">Login</a>
+<?php endif; ?>
     </div>
 </header>
 
@@ -112,7 +114,7 @@ $user_id = $_SESSION['user']['id'] ?? null;
             <div class="card-body text-center">
                 <h5 class="fw-bold"><?= $k['nama']; ?></h5>
                 <p class="text-muted"><?= $k['deskripsi']; ?></p>
-                <p class="fw-bold text-primary fs-5"><?= $k['harga']; ?></p>
+                <p class="fw-bold text-primary fs-5">Rp <?= $k['harga']; ?></p>
                 <p class="small"><?= $k['fitur']; ?></p>
                 <a href="booking.php?id=<?= $k['id']; ?>" class="btn btn-outline-primary w-100 mt-3">
                     Pesan
@@ -216,28 +218,7 @@ Swal.fire({
 <?php unset($_SESSION['success']); } ?>
 
 <!-- 🔥 SCRIPT KAMU TARUH DI SINI -->
-<script>
-const btn = document.getElementById("hamburgerBtn");
-const menu = document.getElementById("menuDropdown");
-const btnBooking = document.getElementById("btnBooking");
-const riwayat = document.getElementById("riwayatBooking");
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 
-btn.addEventListener("click", function() {
-    menu.style.display = menu.style.display === "block" ? "none" : "block";
-});
-
-document.addEventListener("click", function(e) {
-    if (!btn.contains(e.target) && !menu.contains(e.target)) {
-        menu.style.display = "none";
-    }
-});
-
-btnBooking.addEventListener("click", function(e) {
-    e.preventDefault();
-    riwayat.style.display = "block";
-    riwayat.scrollIntoView({ behavior: "smooth" });
-    menu.style.display = "none";
-});
-</script>
 </body>
 </html>

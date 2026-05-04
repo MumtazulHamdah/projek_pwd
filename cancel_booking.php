@@ -2,7 +2,6 @@
 session_start();
 include 'koneksi.php';
 
-// 🔒 HARUS LOGIN USER
 if (!isset($_SESSION['user'])) {
     header("Location: login_user.php");
     exit;
@@ -10,43 +9,48 @@ if (!isset($_SESSION['user'])) {
 
 $user_id = $_SESSION['user']['id'];
 
-// 🔒 CEK ID
-if (!isset($_GET['id'])) {
+// ambil parameter
+$id   = $_GET['id'] ?? null;
+$tipe = $_GET['tipe'] ?? null;
+
+if (!$id || !$tipe) {
+    $_SESSION['error'] = "Data tidak valid!";
     header("Location: riwayat.php");
     exit;
 }
 
-$id = (int) $_GET['id'];
+// 🔥 tentukan tabel (AMAN)
+$tabel = ($tipe == 'fasilitas') ? 'booking_fasilitas' : 'booking';
 
-// 🔍 AMBIL DATA BOOKING
+// ambil data
 $cek = mysqli_fetch_assoc(mysqli_query($conn, "
-SELECT * FROM booking WHERE id='$id'
+SELECT * FROM $tabel WHERE id='$id'
 "));
 
-// ❌ KALO DATA GA ADA
+// ❌ kalau ga ada
 if (!$cek) {
     $_SESSION['error'] = "Data tidak ditemukan!";
     header("Location: riwayat.php");
     exit;
 }
 
-// ❌ CEK PUNYA SIAPA (ANTI HACK)
+// ❌ bukan punya user
 if ($cek['user_id'] != $user_id) {
     $_SESSION['error'] = "Akses ditolak!";
     header("Location: riwayat.php");
     exit;
 }
 
-// ❌ KALO SUDAH PAID / CANCELLED
+// ❌ kalau sudah paid / cancelled
 if ($cek['status'] == 'paid' || $cek['status'] == 'cancelled') {
     $_SESSION['error'] = "Booking tidak bisa dibatalkan!";
     header("Location: riwayat.php");
     exit;
 }
 
-// ✅ BARU BOLEH CANCEL
+// ✅ cancel
 mysqli_query($conn, "
-UPDATE booking SET status='cancelled' WHERE id='$id'
+UPDATE $tabel SET status='cancelled' WHERE id='$id'
 ");
 
 $_SESSION['success'] = true;
