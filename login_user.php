@@ -53,8 +53,11 @@ if(isset($_POST['login'])) {
         <?php endif; ?>
 
         <form method="POST">
+            <label for ="nama_lengkap">Username</label>
             <input type="text" name="username" class="form-control mb-3" placeholder="Username" required>
+            <label for ="nama_lengka">Password</label>
             <input type="password" name="password" class="form-control mb-3" placeholder="Password" required>
+
 
             <button type="submit" name="login" class="btn btn-primary w-100">
                 Login

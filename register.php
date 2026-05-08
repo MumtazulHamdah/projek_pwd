@@ -5,7 +5,7 @@ include 'koneksi.php';
 $error = "";
 
 if(isset($_POST['register'])) {
-
+    $nama_lengkap = mysqli_real_escape_string($conn, $_POST['nama_lengkap']);
     $username = mysqli_real_escape_string($conn, $_POST['username']);
     $password = $_POST['password'];
 
@@ -13,18 +13,15 @@ if(isset($_POST['register'])) {
     $cek = mysqli_query($conn, "SELECT * FROM users WHERE username='$username'");
 
     if(mysqli_num_rows($cek) > 0){
-
-        // ❗ kalau sudah ada → suruh login
         $_SESSION['error'] = "Akun sudah ada, silakan login!";
         header("Location: login_user.php");
         exit;
 
     } else {
 
-        // ✅ simpan user baru
         mysqli_query($conn, "
-            INSERT INTO users (username, password)
-            VALUES ('$username', '$password')
+            INSERT INTO users (username, password, nama_lengkap)
+            VALUES ('$username', '$password', '$nama_lengkap')
         ");
 
         $_SESSION['success'] = "Berhasil daftar, silakan login!";
@@ -43,20 +40,20 @@ if(isset($_POST['register'])) {
 <link rel="stylesheet" href="css/auth.css">
 
 </head>
-
 <body>
-
 <div class="overlay d-flex justify-content-center align-items-center">
 
     <div class="auth-card">
         <h3 class="text-center auth-title mb-3">Register</h3>
-
         <?php if($error): ?>
             <div class="alert alert-danger"><?= $error ?></div>
         <?php endif; ?>
-
         <form method="POST">
+            <label for ="nama_lengkap">Nama Lengkap</label>
+            <input type="text" name="nama_lengkap" class="form-control mb-3" placeholder="Nama Lengkap" required>
+            <label for ="nama_lengkap">Username</label>
             <input type="text" name="username" class="form-control mb-3" placeholder="Username" required>
+            <label for ="nama_lengka">Password</label>
             <input type="password" name="password" class="form-control mb-3" placeholder="Password" required>
 
             <button type="submit" name="register" class="btn btn-primary w-100">
