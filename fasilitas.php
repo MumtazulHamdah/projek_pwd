@@ -60,7 +60,7 @@ include 'koneksi.php'; ?>
 
 <div class="container my-5" id="fasilitas">
     <div class="text-center mb-5">
-        <h2>Fasilitas Hotel</h2>
+        <h2 class="mb-3 fw-bold">Fasilitas Hotel</h2>
         <p class="text-muted">Kami menyediakan fasilitas lengkap untuk kenyamanan Anda</p>
     </div>
     <div class="row g-4">
@@ -84,7 +84,7 @@ include 'koneksi.php'; ?>
     </div>
 </div>
 <div class="container my-5">
-    <h2 class="text-center mb-4">Swimming Pool</h2>
+    <h2 class="text-center mb-3 fw-bold">Swimming Pool</h2>
     <p class="text-center text-muted mb-5">Kolam renang dengan view laut</p>
     <div class="row justify-content-center">
     <div class="col-md-8">

@@ -1,6 +1,6 @@
 body {
     font-family: 'Poppins', sans-serif;
-    background: url('/..img/hotel.jpg') no-repeat center center/cover;
+    background: url('../img/hotel.jpg') no-repeat center center/cover;
     height: 100vh;
     margin: 0;
 }
@@ -27,12 +27,16 @@ body {
     object-fit: cover;
 }
 
+.facility-img {
+    height: 100%;
+    object-fit: cover;
+}
+
 .price {
     color: #c8a96a;
     font-weight: bold;
     font-size: 20px;
 }
-
 .btn-primary {
     background-color: #0f2a44;
     border: none;

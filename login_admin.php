@@ -10,7 +10,7 @@ if(isset($_POST['login'])) {
         // kalau pakai password biasa (punyamu sekarang)
         if($password == $data['password']){
             $_SESSION['admin'] = $data['username'];
-            header("Location: admin_kamar.php");
+            header("Location: admin.php");
             exit;
         } else {
             $error = "Password salah!";
