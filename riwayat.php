@@ -1,14 +1,11 @@
 <?php
 session_start();
 include 'koneksi.php';
-
 $user_id = $_SESSION['user']['id'] ?? null;
-
 if (!$user_id) {
     header("Location: login_user.php");
     exit;
 }
-
 $booking = mysqli_query($conn, "
 
 -- KAMAR
@@ -37,9 +34,7 @@ SELECT
 FROM booking_fasilitas
 JOIN fasilitas ON booking_fasilitas.fasilitas_id = fasilitas.id
 WHERE booking_fasilitas.user_id = '$user_id'
-
 ORDER BY id DESC
-
 ");
 ?>
 
@@ -49,11 +44,9 @@ ORDER BY id DESC
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>My Booking</title>
-
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
 <style>
 body {
     margin: 0;
@@ -61,75 +54,57 @@ body {
     background: #f8f9fa;
     padding-top: 80px;
 }
-
-/* ===== NAVBAR ===== */
 .navbar-custom {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     z-index: 1000;
-
     display: flex;
     align-items: center;
-
     padding: 12px 60px;
     background: white;
     box-shadow: 0 2px 10px rgba(0,0,0,0.05);
 }
-
 .logo img {
     height: 50px;
 }
-
 .nav-title {
     font-size: 18px;
     font-weight: 600;
     margin-left: 10px;
     color: #333;
 }
-
-/* ===== HERO FULL ===== */
 .hero-section {
     width: 100%;
     height: 150vh;
     background: url('img/hotel.jpg') center / cover no-repeat;
     position: relative;
 }
-
 .overlay {
     position: absolute;
     width: 100%;
     height: 100%;
     background: rgba(0,0,0,0.5);
 }
-
-/* ===== WRAPPER TABEL ===== */
 .riwayat-wrapper {
     display: flex;
     justify-content: center;
-    margin-top: -800px; /* 🔥 atur naik turun disini */
+    margin-top: -800px;
     padding: 0 20px;
 }
-
 .riwayat-box {
     width: 100%;
     max-width: 1100px;
 }
-
-/* CARD */
 .card {
     border-radius: 15px;
     overflow: hidden;
 }
-
-/* TABLE */
 .table th {
     background: #0d6efd;
     color: white;
 }
-
-/* BUTTON DISABLE STYLE */
 .btn-disabled {
     background: #ccc;
     border: none;
@@ -137,10 +112,7 @@ body {
 }
 </style>
 </head>
-
 <body>
-
-<!-- NAVBAR -->
 <header class="navbar-custom">
     <div class="d-flex align-items-center">
         <a href="dashboard.php" class="logo">
@@ -149,19 +121,13 @@ body {
         <span class="nav-title">My Booking</span>
     </div>
 </header>
-
-<!-- HERO -->
 <div class="hero-section">
     <div class="overlay"></div>
 </div>
-
-<!-- ===== TABEL ===== -->
 <div class="riwayat-wrapper">
-
 <div class="riwayat-box">
 <div class="card shadow-lg">
 <div class="card-body p-0">
-
 <table class="table table-bordered text-center mb-0">
 <thead>
 <tr>
@@ -172,7 +138,6 @@ body {
     <th>Aksi</th>
 </tr>
 </thead>
-
 <tbody>
 <?php while($row = mysqli_fetch_assoc($booking)) : ?>
 <tr>
@@ -206,27 +171,20 @@ body {
                onclick="return confirm('Yakin mau cancel?')">
                Cancel
             </a>
-
         <?php else: ?>
             <button class="btn btn-disabled btn-sm" disabled>
                 Tidak bisa dibatalkan
             </button>
         <?php endif; ?>
     </td>
-
 </tr>
 <?php endwhile; ?>
 </tbody>
-
 </table>
-
 </div>
 </div>
 </div>
-
 </div>
-
-<!-- ===== ALERT ===== -->
 <?php if(isset($_SESSION['success'])) { ?>
 <script>
 Swal.fire({
@@ -250,6 +208,5 @@ Swal.fire({
 });
 </script>
 <?php unset($_SESSION['error']); } ?>
-
 </body>
 </html>

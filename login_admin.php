@@ -1,15 +1,11 @@
 <?php
 session_start();
 include 'koneksi.php';
-
 if(isset($_POST['login'])) {
     $username = $_POST['username'];
     $password = $_POST['password'];
-
-    // query ke tabel admin
     $query = mysqli_query($conn, "SELECT * FROM admin WHERE username='$username'");
     $data = mysqli_fetch_assoc($query);
-
     if($data){
         // kalau pakai password biasa (punyamu sekarang)
         if($password == $data['password']){
@@ -19,7 +15,6 @@ if(isset($_POST['login'])) {
         } else {
             $error = "Password salah!";
         }
-
     } else {
         $error = "Username tidak ditemukan!";
     }
@@ -78,37 +73,27 @@ body {
 </head>
 
 <body>
-
 <div class="overlay d-flex justify-content-center align-items-center">
-
     <div class="login-card">
-
         <h3 class="text-center login-title mb-3">Admin Login</h3>
         <p class="text-center text-muted mb-4">Ombak Biru Hotel System</p>
-
         <?php if(isset($error)) : ?>
             <div class="alert alert-danger"><?= $error; ?></div>
         <?php endif; ?>
-
         <form method="POST">
-
             <div class="mb-3">
                 <label>Username</label>
                 <input type="text" name="username" class="form-control" required>
             </div>
-
             <div class="mb-3">
                 <label>Password</label>
                 <input type="password" name="password" class="form-control" required>
             </div>
-
             <button type="submit" name="login" class="btn btn-login w-100">
                 Login
             </button>
-
         </form>
     </div>
 </div>
-
 </body>
 </html>
