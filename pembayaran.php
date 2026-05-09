@@ -72,6 +72,9 @@ body {
         </form>
     </div>
 </div>
+
+<!-- java -->
+>>>>>>> 7bed936 (up)
 <script>
 function toggleUpload() {
     let metode = document.getElementById("metode").value;
