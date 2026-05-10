@@ -151,50 +151,66 @@ Hapus
     <h5>Edit Kamar</h5>
 </div>
 <div class="modal-body">
+<div class="modal-body">
 <input type="hidden" name="id" value="<?= $k['id']; ?>">
-<div class="mb-3">
+
+<div class="row">
+
+<div class="col-md-6 mb-3">
 <label>Nama</label>
 <input type="text" 
 name="nama"
 class="form-control"
 value="<?= $k['nama']; ?>">
 </div>
-<div class="mb-3">
+
+<div class="col-md-6 mb-3">
 <label>Harga</label>
 <input type="number"
 name="harga"
 class="form-control"
 value="<?= $k['harga']; ?>">
 </div>
-<div class="mb-3">
+
+<div class="col-md-6 mb-3">
 <label>Jumlah Unit</label>
 <input type="number"
 name="jumlah_unit"
 class="form-control"
 value="<?= $k['jumlah_unit']; ?>">
 </div>
-<div class="mb-3">
+
+<div class="col-md-6 mb-3">
 <label>Badge</label>
 <input type="text"
 name="badge"
 class="form-control"
 value="<?= $k['badge']; ?>">
 </div>
-<div class="mb-3">
+
+<div class="col-md-6 mb-3">
 <label>Deskripsi</label>
 <textarea name="deskripsi"
 class="form-control"><?= $k['deskripsi']; ?></textarea>
 </div>
-<div class="mb-3">
+
+<div class="col-md-6 mb-3">
 <label>Fitur</label>
 <textarea name="fitur"
 class="form-control"><?= $k['fitur']; ?></textarea>
 </div>
-<div class="mb-3">
+
+<div class="col-md-6 mb-3">
 <label>Gambar Baru</label>
 <input type="file" name="gambar" class="form-control">
 </div>
+
+<div class="col-md-6 mb-3 text-center">
+<label>Preview</label><br>
 <img src="<?= $k['gambar']; ?>" width="120">
+</div>
+
+</div>
 </div>
 <div class="modal-footer">
 <button type="submit"
@@ -230,33 +246,43 @@ Close
     <h5>Tambah Kamar</h5>
 </div>
 <div class="modal-body">
-<div class="mb-3">
+<div class="modal-body">
+<div class="row">
+
+<div class="col-md-6 mb-3">
 <label>Nama Kamar</label>
 <input type="text" name="nama" class="form-control" required>
 </div>
-<div class="mb-3">
+
+<div class="col-md-6 mb-3">
 <label>Harga</label>
 <input type="number" name="harga" class="form-control" required>
 </div>
-<div class="mb-3">
+
+<div class="col-md-6 mb-3">
 <label>Jumlah Unit</label>
 <input type="number" name="jumlah_unit" class="form-control" required>
 </div>
-<div class="mb-3">
+
+<div class="col-md-6 mb-3">
 <label>Badge</label>
 <input type="text" name="badge" class="form-control">
 </div>
-<div class="mb-3">
+
+<div class="col-md-6 mb-3">
 <label>Deskripsi</label>
 <textarea name="deskripsi" class="form-control"></textarea>
 </div>
-<div class="mb-3">
+
+<div class="col-md-6 mb-3">
 <label>Fitur</label>
 <textarea name="fitur" class="form-control"></textarea>
 </div>
-<div class="mb-3">
+
+<div class="col-12 mb-3">
 <label>Gambar</label>
 <input type="file" name="gambar" class="form-control" required>
+</div>
 </div>
 </div>
 <div class="modal-footer">

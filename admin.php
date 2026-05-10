@@ -64,8 +64,6 @@ ORDER BY id DESC
 </head>
 
 <body>
-
-<!-- NAVBAR -->
 <div class="navbar-custom">
     <div class="navbar-title">Admin Ombak Biru</div>
     <div class="navbar-right">
@@ -73,16 +71,12 @@ ORDER BY id DESC
         <a href="logout.php" class="btn btn-danger btn-sm">Logout</a>
     </div>
 </div>
-<!-- HERO -->
 <div class="hero">
     <div class="overlay">
         <h2>Dashboard Admin</h2>
     </div>
 </div>
-
-<!-- CONTENT -->
 <div class="container content">
-
 <?php if($n['total'] > 0): ?>
 <div class="alert alert-warning mt-4">
     🔔 Ada <?= $n['total']; ?> booking perlu dicek!
@@ -98,10 +92,8 @@ ORDER BY id DESC
 <div class="card shadow mt-3">
 <div class="card-body">
 <div class="mb-4 d-flex gap-2">
-
 </div>
 <h2 class="mb-4">Data Booking</h2>
-
 <table class="table table-bordered">
 <thead>
 <tr>
@@ -113,7 +105,6 @@ ORDER BY id DESC
     <th>Aksi</th>
 </tr>
 </thead>
-
 <tbody>
 <?php while($row = mysqli_fetch_assoc($data)) : ?>
 <tr>

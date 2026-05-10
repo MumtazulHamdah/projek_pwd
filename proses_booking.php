@@ -31,7 +31,7 @@ if ($terpakai >= $stok) {
     die("Maaf, kamar sudah penuh di tanggal tersebut!");
 }
 $_SESSION['booking_temp'] = [
-    'user_id' => $_SESSION['user']['id'], // 🔥 penting banget
+    'user_id' => $_SESSION['user']['id'],
     'nama' => $nama,
     'kamar_id' => $kamar_id,
     'checkin' => $checkin,
