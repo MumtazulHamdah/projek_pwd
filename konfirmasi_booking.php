@@ -25,5 +25,5 @@ if ($tipe == 'kamar') {
 }else {
     die("Tipe tidak valid!");
 }
-header("Location: admin_kamar.php");
+header("Location: admin.php");
 exit;
